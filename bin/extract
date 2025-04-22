@@ -1,0 +1,10 @@
+#!/bin/bash
+# Check if output file is specified
+if [ "$#" -eq 2 ]; then
+  # If two arguments are provided, use the second as the output file
+  npx ts-node schema/parser/extract.ts "$1" "$2"
+  echo "Extracted from $1 to $2"
+else
+  # Otherwise, just run with the input file
+  npx ts-node schema/parser/extract.ts "$@"
+fi

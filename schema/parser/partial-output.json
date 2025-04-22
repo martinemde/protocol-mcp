@@ -1,0 +1,1354 @@
+[
+  {
+    "name": "JSONRPCMessage",
+    "comment": "Refers to any valid JSON-RPC object that can be decoded off the wire, or encoded to be sent.",
+    "type": "any",
+    "nodeText": "export type JSONRPCMessage =\n  | JSONRPCRequest\n  | JSONRPCNotification\n  | JSONRPCBatchRequest\n  | JSONRPCResponse\n  | JSONRPCError\n  | JSONRPCBatchResponse;",
+    "astStructure": {
+      "kind": "TypeAlias",
+      "name": "JSONRPCMessage",
+      "type": "| JSONRPCRequest\n  | JSONRPCNotification\n  | JSONRPCBatchRequest\n  | JSONRPCResponse\n  | JSONRPCError\n  | JSONRPCBatchResponse",
+      "typeNode": {
+        "kind": "UnionType",
+        "types": [
+          {
+            "kind": "TypeReference",
+            "typeName": "JSONRPCRequest",
+            "typeArguments": []
+          },
+          {
+            "kind": "TypeReference",
+            "typeName": "JSONRPCNotification",
+            "typeArguments": []
+          },
+          {
+            "kind": "TypeReference",
+            "typeName": "JSONRPCBatchRequest",
+            "typeArguments": []
+          },
+          {
+            "kind": "TypeReference",
+            "typeName": "JSONRPCResponse",
+            "typeArguments": []
+          },
+          {
+            "kind": "TypeReference",
+            "typeName": "JSONRPCError",
+            "typeArguments": []
+          },
+          {
+            "kind": "TypeReference",
+            "typeName": "JSONRPCBatchResponse",
+            "typeArguments": []
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "JSONRPCBatchRequest",
+    "comment": "A JSON-RPC batch request, as described in https://www.jsonrpc.org/specification#batch.",
+    "type": "any",
+    "nodeText": "export type JSONRPCBatchRequest = (JSONRPCRequest | JSONRPCNotification)[];",
+    "astStructure": {
+      "kind": "TypeAlias",
+      "name": "JSONRPCBatchRequest",
+      "type": "(JSONRPCRequest | JSONRPCNotification)[]",
+      "typeNode": {
+        "kind": "ArrayType",
+        "elementType": {
+          "kind": "SimpleType",
+          "text": "(JSONRPCRequest | JSONRPCNotification)"
+        }
+      }
+    }
+  },
+  {
+    "name": "JSONRPCBatchResponse",
+    "comment": "A JSON-RPC batch response, as described in https://www.jsonrpc.org/specification#batch.",
+    "type": "any",
+    "nodeText": "export type JSONRPCBatchResponse = (JSONRPCResponse | JSONRPCError)[];",
+    "astStructure": {
+      "kind": "TypeAlias",
+      "name": "JSONRPCBatchResponse",
+      "type": "(JSONRPCResponse | JSONRPCError)[]",
+      "typeNode": {
+        "kind": "ArrayType",
+        "elementType": {
+          "kind": "SimpleType",
+          "text": "(JSONRPCResponse | JSONRPCError)"
+        }
+      }
+    }
+  },
+  {
+    "name": "Cursor",
+    "comment": "An opaque token used to represent a cursor for pagination.",
+    "type": "any",
+    "nodeText": "export type Cursor = string;",
+    "astStructure": {
+      "kind": "TypeAlias",
+      "name": "Cursor",
+      "type": "string",
+      "typeNode": {
+        "kind": "SimpleType",
+        "text": "string"
+      }
+    }
+  },
+  {
+    "name": "Request",
+    "comment": "",
+    "type": "any",
+    "nodeText": "export interface Request {\n  method: string;\n  params?: {\n    _meta?: {\n      /**\n       * If specified, the caller is requesting out-of-band progress notifications for this request (as represented by notifications/progress). The value of this parameter is an opaque token that will be attached to any subsequent notifications. The receiver is not obligated to provide these notifications.\n       */\n      progressToken?: ProgressToken;\n    };\n    [key: string]: unknown;\n  };\n}",
+    "astStructure": {
+      "kind": "Interface",
+      "name": "Request",
+      "extends": [],
+      "members": [
+        {
+          "name": "method",
+          "type": "string",
+          "optional": false,
+          "comment": "",
+          "typeNode": {
+            "kind": "SimpleType",
+            "text": "string"
+          }
+        },
+        {
+          "name": "params",
+          "type": "{\n    _meta?: {\n      /**\n       * If specified, the caller is requesting out-of-band progress notifications for this request (as represented by notifications/progress). The value of this parameter is an opaque token that will be attached to any subsequent notifications. The receiver is not obligated to provide these notifications.\n       */\n      progressToken?: ProgressToken;\n    };\n    [key: string]: unknown;\n  }",
+          "optional": true,
+          "comment": "",
+          "typeNode": {
+            "kind": "TypeLiteral",
+            "members": [
+              {
+                "name": "_meta",
+                "type": "{\n      /**\n       * If specified, the caller is requesting out-of-band progress notifications for this request (as represented by notifications/progress). The value of this parameter is an opaque token that will be attached to any subsequent notifications. The receiver is not obligated to provide these notifications.\n       */\n      progressToken?: ProgressToken;\n    }",
+                "optional": true,
+                "comment": "",
+                "typeNode": {
+                  "kind": "TypeLiteral",
+                  "members": [
+                    {
+                      "name": "progressToken",
+                      "type": "ProgressToken",
+                      "optional": true,
+                      "comment": "If specified, the caller is requesting out-of-band progress notifications for this request (as represented by notifications/progress). The value of this parameter is an opaque token that will be attached to any subsequent notifications. The receiver is not obligated to provide these notifications.",
+                      "typeNode": {
+                        "kind": "TypeReference",
+                        "typeName": "ProgressToken",
+                        "typeArguments": []
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "Notification",
+    "comment": "",
+    "type": "any",
+    "nodeText": "export interface Notification {\n  method: string;\n  params?: {\n    /**\n     * This parameter name is reserved by MCP to allow clients and servers to attach additional metadata to their notifications.\n     */\n    _meta?: { [key: string]: unknown };\n    [key: string]: unknown;\n  };\n}",
+    "astStructure": {
+      "kind": "Interface",
+      "name": "Notification",
+      "extends": [],
+      "members": [
+        {
+          "name": "method",
+          "type": "string",
+          "optional": false,
+          "comment": "",
+          "typeNode": {
+            "kind": "SimpleType",
+            "text": "string"
+          }
+        },
+        {
+          "name": "params",
+          "type": "{\n    /**\n     * This parameter name is reserved by MCP to allow clients and servers to attach additional metadata to their notifications.\n     */\n    _meta?: { [key: string]: unknown };\n    [key: string]: unknown;\n  }",
+          "optional": true,
+          "comment": "",
+          "typeNode": {
+            "kind": "TypeLiteral",
+            "members": [
+              {
+                "name": "_meta",
+                "type": "{ [key: string]: unknown }",
+                "optional": true,
+                "comment": "This parameter name is reserved by MCP to allow clients and servers to attach additional metadata to their notifications.",
+                "typeNode": {
+                  "kind": "TypeLiteral",
+                  "members": []
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "Result",
+    "comment": "",
+    "type": "any",
+    "nodeText": "export interface Result {\n  /**\n   * This result property is reserved by the protocol to allow clients and servers to attach additional metadata to their responses.\n   */\n  _meta?: { [key: string]: unknown };\n  [key: string]: unknown;\n}",
+    "astStructure": {
+      "kind": "Interface",
+      "name": "Result",
+      "extends": [],
+      "members": [
+        {
+          "name": "_meta",
+          "type": "{ [key: string]: unknown }",
+          "optional": true,
+          "comment": "This result property is reserved by the protocol to allow clients and servers to attach additional metadata to their responses.",
+          "typeNode": {
+            "kind": "TypeLiteral",
+            "members": []
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "RequestId",
+    "comment": "A uniquely identifying ID for a request in JSON-RPC.",
+    "type": "any",
+    "nodeText": "export type RequestId = string | number;",
+    "astStructure": {
+      "kind": "TypeAlias",
+      "name": "RequestId",
+      "type": "string | number",
+      "typeNode": {
+        "kind": "UnionType",
+        "types": [
+          {
+            "kind": "SimpleType",
+            "text": "string"
+          },
+          {
+            "kind": "SimpleType",
+            "text": "number"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "JSONRPCRequest",
+    "comment": "A request that expects a response.",
+    "type": "any",
+    "nodeText": "export interface JSONRPCRequest extends Request {\n  jsonrpc: typeof JSONRPC_VERSION;\n  id: RequestId;\n}",
+    "astStructure": {
+      "kind": "Interface",
+      "name": "JSONRPCRequest",
+      "extends": [
+        "Request"
+      ],
+      "members": [
+        {
+          "name": "jsonrpc",
+          "type": "typeof JSONRPC_VERSION",
+          "optional": false,
+          "comment": "",
+          "typeNode": {
+            "kind": "SimpleType",
+            "text": "typeof JSONRPC_VERSION"
+          }
+        },
+        {
+          "name": "id",
+          "type": "RequestId",
+          "optional": false,
+          "comment": "",
+          "typeNode": {
+            "kind": "TypeReference",
+            "typeName": "RequestId",
+            "typeArguments": []
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "JSONRPCNotification",
+    "comment": "A notification which does not expect a response.",
+    "type": "any",
+    "nodeText": "export interface JSONRPCNotification extends Notification {\n  jsonrpc: typeof JSONRPC_VERSION;\n}",
+    "astStructure": {
+      "kind": "Interface",
+      "name": "JSONRPCNotification",
+      "extends": [
+        "Notification"
+      ],
+      "members": [
+        {
+          "name": "jsonrpc",
+          "type": "typeof JSONRPC_VERSION",
+          "optional": false,
+          "comment": "",
+          "typeNode": {
+            "kind": "SimpleType",
+            "text": "typeof JSONRPC_VERSION"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "JSONRPCResponse",
+    "comment": "A successful (non-error) response to a request.",
+    "type": "any",
+    "nodeText": "export interface JSONRPCResponse {\n  jsonrpc: typeof JSONRPC_VERSION;\n  id: RequestId;\n  result: Result;\n}",
+    "astStructure": {
+      "kind": "Interface",
+      "name": "JSONRPCResponse",
+      "extends": [],
+      "members": [
+        {
+          "name": "jsonrpc",
+          "type": "typeof JSONRPC_VERSION",
+          "optional": false,
+          "comment": "",
+          "typeNode": {
+            "kind": "SimpleType",
+            "text": "typeof JSONRPC_VERSION"
+          }
+        },
+        {
+          "name": "id",
+          "type": "RequestId",
+          "optional": false,
+          "comment": "",
+          "typeNode": {
+            "kind": "TypeReference",
+            "typeName": "RequestId",
+            "typeArguments": []
+          }
+        },
+        {
+          "name": "result",
+          "type": "Result",
+          "optional": false,
+          "comment": "",
+          "typeNode": {
+            "kind": "TypeReference",
+            "typeName": "Result",
+            "typeArguments": []
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "JSONRPCError",
+    "comment": "A response to a request that indicates an error occurred.",
+    "type": "any",
+    "nodeText": "export interface JSONRPCError {\n  jsonrpc: typeof JSONRPC_VERSION;\n  id: RequestId;\n  error: {\n    /**\n     * The error type that occurred.\n     */\n    code: number;\n    /**\n     * A short description of the error. The message SHOULD be limited to a concise single sentence.\n     */\n    message: string;\n    /**\n     * Additional information about the error. The value of this member is defined by the sender (e.g. detailed error information, nested errors etc.).\n     */\n    data?: unknown;\n  };\n}",
+    "astStructure": {
+      "kind": "Interface",
+      "name": "JSONRPCError",
+      "extends": [],
+      "members": [
+        {
+          "name": "jsonrpc",
+          "type": "typeof JSONRPC_VERSION",
+          "optional": false,
+          "comment": "",
+          "typeNode": {
+            "kind": "SimpleType",
+            "text": "typeof JSONRPC_VERSION"
+          }
+        },
+        {
+          "name": "id",
+          "type": "RequestId",
+          "optional": false,
+          "comment": "",
+          "typeNode": {
+            "kind": "TypeReference",
+            "typeName": "RequestId",
+            "typeArguments": []
+          }
+        },
+        {
+          "name": "error",
+          "type": "{\n    /**\n     * The error type that occurred.\n     */\n    code: number;\n    /**\n     * A short description of the error. The message SHOULD be limited to a concise single sentence.\n     */\n    message: string;\n    /**\n     * Additional information about the error. The value of this member is defined by the sender (e.g. detailed error information, nested errors etc.).\n     */\n    data?: unknown;\n  }",
+          "optional": false,
+          "comment": "",
+          "typeNode": {
+            "kind": "TypeLiteral",
+            "members": [
+              {
+                "name": "code",
+                "type": "number",
+                "optional": false,
+                "comment": "The error type that occurred.",
+                "typeNode": {
+                  "kind": "SimpleType",
+                  "text": "number"
+                }
+              },
+              {
+                "name": "message",
+                "type": "string",
+                "optional": false,
+                "comment": "A short description of the error. The message SHOULD be limited to a concise single sentence.",
+                "typeNode": {
+                  "kind": "SimpleType",
+                  "text": "string"
+                }
+              },
+              {
+                "name": "data",
+                "type": "unknown",
+                "optional": true,
+                "comment": "Additional information about the error. The value of this member is defined by the sender (e.g. detailed error information, nested errors etc.).",
+                "typeNode": {
+                  "kind": "SimpleType",
+                  "text": "unknown"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "EmptyResult",
+    "comment": "A response that indicates success but carries no data.",
+    "type": "any",
+    "nodeText": "export type EmptyResult = Result;",
+    "astStructure": {
+      "kind": "TypeAlias",
+      "name": "EmptyResult",
+      "type": "Result",
+      "typeNode": {
+        "kind": "TypeReference",
+        "typeName": "Result",
+        "typeArguments": []
+      }
+    }
+  },
+  {
+    "name": "InitializeRequest",
+    "comment": "This request is sent from the client to the server when it first connects, asking it to begin initialization.",
+    "type": "any",
+    "nodeText": "export interface InitializeRequest extends Request {\n  method: \"initialize\";\n  params: {\n    /**\n     * The latest version of the Model Context Protocol that the client supports. The client MAY decide to support older versions as well.\n     */\n    protocolVersion: string;\n    capabilities: ClientCapabilities;\n    clientInfo: Implementation;\n  };\n}",
+    "astStructure": {
+      "kind": "Interface",
+      "name": "InitializeRequest",
+      "extends": [
+        "Request"
+      ],
+      "members": [
+        {
+          "name": "method",
+          "type": "\"initialize\"",
+          "optional": false,
+          "comment": "",
+          "typeNode": {
+            "kind": "LiteralType",
+            "literal": "\"initialize\""
+          }
+        },
+        {
+          "name": "params",
+          "type": "{\n    /**\n     * The latest version of the Model Context Protocol that the client supports. The client MAY decide to support older versions as well.\n     */\n    protocolVersion: string;\n    capabilities: ClientCapabilities;\n    clientInfo: Implementation;\n  }",
+          "optional": false,
+          "comment": "",
+          "typeNode": {
+            "kind": "TypeLiteral",
+            "members": [
+              {
+                "name": "protocolVersion",
+                "type": "string",
+                "optional": false,
+                "comment": "The latest version of the Model Context Protocol that the client supports. The client MAY decide to support older versions as well.",
+                "typeNode": {
+                  "kind": "SimpleType",
+                  "text": "string"
+                }
+              },
+              {
+                "name": "capabilities",
+                "type": "ClientCapabilities",
+                "optional": false,
+                "comment": "",
+                "typeNode": {
+                  "kind": "TypeReference",
+                  "typeName": "ClientCapabilities",
+                  "typeArguments": []
+                }
+              },
+              {
+                "name": "clientInfo",
+                "type": "Implementation",
+                "optional": false,
+                "comment": "",
+                "typeNode": {
+                  "kind": "TypeReference",
+                  "typeName": "Implementation",
+                  "typeArguments": []
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "InitializeResult",
+    "comment": "After receiving an initialize request from the client, the server sends this response.",
+    "type": "any",
+    "nodeText": "export interface InitializeResult extends Result {\n  /**\n   * The version of the Model Context Protocol that the server wants to use. This may not match the version that the client requested. If the client cannot support this version, it MUST disconnect.\n   */\n  protocolVersion: string;\n  capabilities: ServerCapabilities;\n  serverInfo: Implementation;\n\n  /**\n   * Instructions describing how to use the server and its features.\n   *\n   * This can be used by clients to improve the LLM's understanding of available tools, resources, etc. It can be thought of like a \"hint\" to the model. For example, this information MAY be added to the system prompt.\n   */\n  instructions?: string;\n}",
+    "astStructure": {
+      "kind": "Interface",
+      "name": "InitializeResult",
+      "extends": [
+        "Result"
+      ],
+      "members": [
+        {
+          "name": "protocolVersion",
+          "type": "string",
+          "optional": false,
+          "comment": "The version of the Model Context Protocol that the server wants to use. This may not match the version that the client requested. If the client cannot support this version, it MUST disconnect.",
+          "typeNode": {
+            "kind": "SimpleType",
+            "text": "string"
+          }
+        },
+        {
+          "name": "capabilities",
+          "type": "ServerCapabilities",
+          "optional": false,
+          "comment": "",
+          "typeNode": {
+            "kind": "TypeReference",
+            "typeName": "ServerCapabilities",
+            "typeArguments": []
+          }
+        },
+        {
+          "name": "serverInfo",
+          "type": "Implementation",
+          "optional": false,
+          "comment": "",
+          "typeNode": {
+            "kind": "TypeReference",
+            "typeName": "Implementation",
+            "typeArguments": []
+          }
+        },
+        {
+          "name": "instructions",
+          "type": "string",
+          "optional": true,
+          "comment": "Instructions describing how to use the server and its features.\n\nThis can be used by clients to improve the LLM's understanding of available tools, resources, etc. It can be thought of like a \"hint\" to the model. For example, this information MAY be added to the system prompt.",
+          "typeNode": {
+            "kind": "SimpleType",
+            "text": "string"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "InitializedNotification",
+    "comment": "This notification is sent from the client to the server after initialization has finished.",
+    "type": "any",
+    "nodeText": "export interface InitializedNotification extends Notification {\n  method: \"notifications/initialized\";\n}",
+    "astStructure": {
+      "kind": "Interface",
+      "name": "InitializedNotification",
+      "extends": [
+        "Notification"
+      ],
+      "members": [
+        {
+          "name": "method",
+          "type": "\"notifications/initialized\"",
+          "optional": false,
+          "comment": "",
+          "typeNode": {
+            "kind": "LiteralType",
+            "literal": "\"notifications/initialized\""
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "ClientCapabilities",
+    "comment": "Capabilities a client may support. Known capabilities are defined here, in this schema, but this is not a closed set: any client can define its own, additional capabilities.",
+    "type": "any",
+    "nodeText": "export interface ClientCapabilities {\n  /**\n   * Experimental, non-standard capabilities that the client supports.\n   */\n  experimental?: { [key: string]: object };\n  /**\n   * Present if the client supports listing roots.\n   */\n  roots?: {\n    /**\n     * Whether the client supports notifications for changes to the roots list.\n     */\n    listChanged?: boolean;\n  };\n  /**\n   * Present if the client supports sampling from an LLM.\n   */\n  sampling?: object;\n}",
+    "astStructure": {
+      "kind": "Interface",
+      "name": "ClientCapabilities",
+      "extends": [],
+      "members": [
+        {
+          "name": "experimental",
+          "type": "{ [key: string]: object }",
+          "optional": true,
+          "comment": "Experimental, non-standard capabilities that the client supports.",
+          "typeNode": {
+            "kind": "TypeLiteral",
+            "members": []
+          }
+        },
+        {
+          "name": "roots",
+          "type": "{\n    /**\n     * Whether the client supports notifications for changes to the roots list.\n     */\n    listChanged?: boolean;\n  }",
+          "optional": true,
+          "comment": "Present if the client supports listing roots.",
+          "typeNode": {
+            "kind": "TypeLiteral",
+            "members": [
+              {
+                "name": "listChanged",
+                "type": "boolean",
+                "optional": true,
+                "comment": "Whether the client supports notifications for changes to the roots list.",
+                "typeNode": {
+                  "kind": "SimpleType",
+                  "text": "boolean"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "sampling",
+          "type": "object",
+          "optional": true,
+          "comment": "Present if the client supports sampling from an LLM.",
+          "typeNode": {
+            "kind": "SimpleType",
+            "text": "object"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "ServerCapabilities",
+    "comment": "Capabilities that a server may support. Known capabilities are defined here, in this schema, but this is not a closed set: any server can define its own, additional capabilities.",
+    "type": "any",
+    "nodeText": "export interface ServerCapabilities {\n  /**\n   * Experimental, non-standard capabilities that the server supports.\n   */\n  experimental?: { [key: string]: object };\n  /**\n   * Present if the server supports sending log messages to the client.\n   */\n  logging?: object;\n  /**\n   * Present if the server supports argument autocompletion suggestions.\n   */\n  completions?: object;\n  /**\n   * Present if the server offers any prompt templates.\n   */\n  prompts?: {\n    /**\n     * Whether this server supports notifications for changes to the prompt list.\n     */\n    listChanged?: boolean;\n  };\n  /**\n   * Present if the server offers any resources to read.\n   */\n  resources?: {\n    /**\n     * Whether this server supports subscribing to resource updates.\n     */\n    subscribe?: boolean;\n    /**\n     * Whether this server supports notifications for changes to the resource list.\n     */\n    listChanged?: boolean;\n  };\n  /**\n   * Present if the server offers any tools to call.\n   */\n  tools?: {\n    /**\n     * Whether this server supports notifications for changes to the tool list.\n     */\n    listChanged?: boolean;\n  };\n}",
+    "astStructure": {
+      "kind": "Interface",
+      "name": "ServerCapabilities",
+      "extends": [],
+      "members": [
+        {
+          "name": "experimental",
+          "type": "{ [key: string]: object }",
+          "optional": true,
+          "comment": "Experimental, non-standard capabilities that the server supports.",
+          "typeNode": {
+            "kind": "TypeLiteral",
+            "members": []
+          }
+        },
+        {
+          "name": "logging",
+          "type": "object",
+          "optional": true,
+          "comment": "Present if the server supports sending log messages to the client.",
+          "typeNode": {
+            "kind": "SimpleType",
+            "text": "object"
+          }
+        },
+        {
+          "name": "completions",
+          "type": "object",
+          "optional": true,
+          "comment": "Present if the server supports argument autocompletion suggestions.",
+          "typeNode": {
+            "kind": "SimpleType",
+            "text": "object"
+          }
+        },
+        {
+          "name": "prompts",
+          "type": "{\n    /**\n     * Whether this server supports notifications for changes to the prompt list.\n     */\n    listChanged?: boolean;\n  }",
+          "optional": true,
+          "comment": "Present if the server offers any prompt templates.",
+          "typeNode": {
+            "kind": "TypeLiteral",
+            "members": [
+              {
+                "name": "listChanged",
+                "type": "boolean",
+                "optional": true,
+                "comment": "Whether this server supports notifications for changes to the prompt list.",
+                "typeNode": {
+                  "kind": "SimpleType",
+                  "text": "boolean"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "resources",
+          "type": "{\n    /**\n     * Whether this server supports subscribing to resource updates.\n     */\n    subscribe?: boolean;\n    /**\n     * Whether this server supports notifications for changes to the resource list.\n     */\n    listChanged?: boolean;\n  }",
+          "optional": true,
+          "comment": "Present if the server offers any resources to read.",
+          "typeNode": {
+            "kind": "TypeLiteral",
+            "members": [
+              {
+                "name": "subscribe",
+                "type": "boolean",
+                "optional": true,
+                "comment": "Whether this server supports subscribing to resource updates.",
+                "typeNode": {
+                  "kind": "SimpleType",
+                  "text": "boolean"
+                }
+              },
+              {
+                "name": "listChanged",
+                "type": "boolean",
+                "optional": true,
+                "comment": "Whether this server supports notifications for changes to the resource list.",
+                "typeNode": {
+                  "kind": "SimpleType",
+                  "text": "boolean"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "tools",
+          "type": "{\n    /**\n     * Whether this server supports notifications for changes to the tool list.\n     */\n    listChanged?: boolean;\n  }",
+          "optional": true,
+          "comment": "Present if the server offers any tools to call.",
+          "typeNode": {
+            "kind": "TypeLiteral",
+            "members": [
+              {
+                "name": "listChanged",
+                "type": "boolean",
+                "optional": true,
+                "comment": "Whether this server supports notifications for changes to the tool list.",
+                "typeNode": {
+                  "kind": "SimpleType",
+                  "text": "boolean"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "Implementation",
+    "comment": "Describes the name and version of an MCP implementation.",
+    "type": "any",
+    "nodeText": "export interface Implementation {\n  name: string;\n  version: string;\n}",
+    "astStructure": {
+      "kind": "Interface",
+      "name": "Implementation",
+      "extends": [],
+      "members": [
+        {
+          "name": "name",
+          "type": "string",
+          "optional": false,
+          "comment": "",
+          "typeNode": {
+            "kind": "SimpleType",
+            "text": "string"
+          }
+        },
+        {
+          "name": "version",
+          "type": "string",
+          "optional": false,
+          "comment": "",
+          "typeNode": {
+            "kind": "SimpleType",
+            "text": "string"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "PingRequest",
+    "comment": "A ping, issued by either the server or the client, to check that the other party is still alive. The receiver must promptly respond, or else may be disconnected.",
+    "type": "any",
+    "nodeText": "export interface PingRequest extends Request {\n  method: \"ping\";\n}",
+    "astStructure": {
+      "kind": "Interface",
+      "name": "PingRequest",
+      "extends": [
+        "Request"
+      ],
+      "members": [
+        {
+          "name": "method",
+          "type": "\"ping\"",
+          "optional": false,
+          "comment": "",
+          "typeNode": {
+            "kind": "LiteralType",
+            "literal": "\"ping\""
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "PaginatedRequest",
+    "comment": "",
+    "type": "any",
+    "nodeText": "export interface PaginatedRequest extends Request {\n  params?: {\n    /**\n     * An opaque token representing the current pagination position.\n     * If provided, the server should return results starting after this cursor.\n     */\n    cursor?: Cursor;\n  };\n}",
+    "astStructure": {
+      "kind": "Interface",
+      "name": "PaginatedRequest",
+      "extends": [
+        "Request"
+      ],
+      "members": [
+        {
+          "name": "params",
+          "type": "{\n    /**\n     * An opaque token representing the current pagination position.\n     * If provided, the server should return results starting after this cursor.\n     */\n    cursor?: Cursor;\n  }",
+          "optional": true,
+          "comment": "",
+          "typeNode": {
+            "kind": "TypeLiteral",
+            "members": [
+              {
+                "name": "cursor",
+                "type": "Cursor",
+                "optional": true,
+                "comment": "An opaque token representing the current pagination position.\nIf provided, the server should return results starting after this cursor.",
+                "typeNode": {
+                  "kind": "TypeReference",
+                  "typeName": "Cursor",
+                  "typeArguments": []
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "PaginatedResult",
+    "comment": "",
+    "type": "any",
+    "nodeText": "export interface PaginatedResult extends Result {\n  /**\n   * An opaque token representing the pagination position after the last returned result.\n   * If present, there may be more results available.\n   */\n  nextCursor?: Cursor;\n}",
+    "astStructure": {
+      "kind": "Interface",
+      "name": "PaginatedResult",
+      "extends": [
+        "Result"
+      ],
+      "members": [
+        {
+          "name": "nextCursor",
+          "type": "Cursor",
+          "optional": true,
+          "comment": "An opaque token representing the pagination position after the last returned result.\nIf present, there may be more results available.",
+          "typeNode": {
+            "kind": "TypeReference",
+            "typeName": "Cursor",
+            "typeArguments": []
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "ListToolsRequest",
+    "comment": "Sent from the client to request a list of tools the server has.",
+    "type": "any",
+    "nodeText": "export interface ListToolsRequest extends PaginatedRequest {\n  method: \"tools/list\";\n}",
+    "astStructure": {
+      "kind": "Interface",
+      "name": "ListToolsRequest",
+      "extends": [
+        "PaginatedRequest"
+      ],
+      "members": [
+        {
+          "name": "method",
+          "type": "\"tools/list\"",
+          "optional": false,
+          "comment": "",
+          "typeNode": {
+            "kind": "LiteralType",
+            "literal": "\"tools/list\""
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "ListToolsResult",
+    "comment": "The server's response to a tools/list request from the client.",
+    "type": "any",
+    "nodeText": "export interface ListToolsResult extends PaginatedResult {\n  tools: Tool[];\n}",
+    "astStructure": {
+      "kind": "Interface",
+      "name": "ListToolsResult",
+      "extends": [
+        "PaginatedResult"
+      ],
+      "members": [
+        {
+          "name": "tools",
+          "type": "Tool[]",
+          "optional": false,
+          "comment": "",
+          "typeNode": {
+            "kind": "ArrayType",
+            "elementType": {
+              "kind": "TypeReference",
+              "typeName": "Tool",
+              "typeArguments": []
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "CallToolResult",
+    "comment": "The server's response to a tool call.\n\nAny errors that originate from the tool SHOULD be reported inside the result\nobject, with `isError` set to true, _not_ as an MCP protocol-level error\nresponse. Otherwise, the LLM would not be able to see that an error occurred\nand self-correct.\n\nHowever, any errors in _finding_ the tool, an error indicating that the\nserver does not support tool calls, or any other exceptional conditions,\nshould be reported as an MCP error response.",
+    "type": "any",
+    "nodeText": "export interface CallToolResult extends Result {\n  content: (TextContent | ImageContent | AudioContent | EmbeddedResource)[];\n\n  /**\n   * Whether the tool call ended in an error.\n   *\n   * If not set, this is assumed to be false (the call was successful).\n   */\n  isError?: boolean;\n}",
+    "astStructure": {
+      "kind": "Interface",
+      "name": "CallToolResult",
+      "extends": [
+        "Result"
+      ],
+      "members": [
+        {
+          "name": "content",
+          "type": "(TextContent | ImageContent | AudioContent | EmbeddedResource)[]",
+          "optional": false,
+          "comment": "",
+          "typeNode": {
+            "kind": "ArrayType",
+            "elementType": {
+              "kind": "SimpleType",
+              "text": "(TextContent | ImageContent | AudioContent | EmbeddedResource)"
+            }
+          }
+        },
+        {
+          "name": "isError",
+          "type": "boolean",
+          "optional": true,
+          "comment": "Whether the tool call ended in an error.\n\nIf not set, this is assumed to be false (the call was successful).",
+          "typeNode": {
+            "kind": "SimpleType",
+            "text": "boolean"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "CallToolRequest",
+    "comment": "Used by the client to invoke a tool provided by the server.",
+    "type": "any",
+    "nodeText": "export interface CallToolRequest extends Request {\n  method: \"tools/call\";\n  params: {\n    name: string;\n    arguments?: { [key: string]: unknown };\n  };\n}",
+    "astStructure": {
+      "kind": "Interface",
+      "name": "CallToolRequest",
+      "extends": [
+        "Request"
+      ],
+      "members": [
+        {
+          "name": "method",
+          "type": "\"tools/call\"",
+          "optional": false,
+          "comment": "",
+          "typeNode": {
+            "kind": "LiteralType",
+            "literal": "\"tools/call\""
+          }
+        },
+        {
+          "name": "params",
+          "type": "{\n    name: string;\n    arguments?: { [key: string]: unknown };\n  }",
+          "optional": false,
+          "comment": "",
+          "typeNode": {
+            "kind": "TypeLiteral",
+            "members": [
+              {
+                "name": "name",
+                "type": "string",
+                "optional": false,
+                "comment": "",
+                "typeNode": {
+                  "kind": "SimpleType",
+                  "text": "string"
+                }
+              },
+              {
+                "name": "arguments",
+                "type": "{ [key: string]: unknown }",
+                "optional": true,
+                "comment": "",
+                "typeNode": {
+                  "kind": "TypeLiteral",
+                  "members": []
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "ToolListChangedNotification",
+    "comment": "An optional notification from the server to the client, informing it that the list of tools it offers has changed. This may be issued by servers without any previous subscription from the client.",
+    "type": "any",
+    "nodeText": "export interface ToolListChangedNotification extends Notification {\n  method: \"notifications/tools/list_changed\";\n}",
+    "astStructure": {
+      "kind": "Interface",
+      "name": "ToolListChangedNotification",
+      "extends": [
+        "Notification"
+      ],
+      "members": [
+        {
+          "name": "method",
+          "type": "\"notifications/tools/list_changed\"",
+          "optional": false,
+          "comment": "",
+          "typeNode": {
+            "kind": "LiteralType",
+            "literal": "\"notifications/tools/list_changed\""
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "ToolAnnotations",
+    "comment": "Additional properties describing a Tool to clients.\n\nNOTE: all properties in ToolAnnotations are **hints**.\nThey are not guaranteed to provide a faithful description of\ntool behavior (including descriptive properties like `title`).\n\nClients should never make tool use decisions based on ToolAnnotations\nreceived from untrusted servers.",
+    "type": "any",
+    "nodeText": "export interface ToolAnnotations {\n  /**\n   * A human-readable title for the tool.\n   */\n  title?: string;\n\n  /**\n   * If true, the tool does not modify its environment.\n   *\n   * Default: false\n   */\n  readOnlyHint?: boolean;\n\n  /**\n   * If true, the tool may perform destructive updates to its environment.\n   * If false, the tool performs only additive updates.\n   *\n   * (This property is meaningful only when `readOnlyHint == false`)\n   *\n   * Default: true\n   */\n  destructiveHint?: boolean;\n\n  /**\n   * If true, calling the tool repeatedly with the same arguments\n   * will have no additional effect on the its environment.\n   *\n   * (This property is meaningful only when `readOnlyHint == false`)\n   *\n   * Default: false\n   */\n  idempotentHint?: boolean;\n\n  /**\n   * If true, this tool may interact with an \"open world\" of external\n   * entities. If false, the tool's domain of interaction is closed.\n   * For example, the world of a web search tool is open, whereas that\n   * of a memory tool is not.\n   *\n   * Default: true\n   */\n  openWorldHint?: boolean;\n}",
+    "astStructure": {
+      "kind": "Interface",
+      "name": "ToolAnnotations",
+      "extends": [],
+      "members": [
+        {
+          "name": "title",
+          "type": "string",
+          "optional": true,
+          "comment": "A human-readable title for the tool.",
+          "typeNode": {
+            "kind": "SimpleType",
+            "text": "string"
+          }
+        },
+        {
+          "name": "readOnlyHint",
+          "type": "boolean",
+          "optional": true,
+          "comment": "If true, the tool does not modify its environment.\n\nDefault: false",
+          "typeNode": {
+            "kind": "SimpleType",
+            "text": "boolean"
+          }
+        },
+        {
+          "name": "destructiveHint",
+          "type": "boolean",
+          "optional": true,
+          "comment": "If true, the tool may perform destructive updates to its environment.\nIf false, the tool performs only additive updates.\n\n(This property is meaningful only when `readOnlyHint == false`)\n\nDefault: true",
+          "typeNode": {
+            "kind": "SimpleType",
+            "text": "boolean"
+          }
+        },
+        {
+          "name": "idempotentHint",
+          "type": "boolean",
+          "optional": true,
+          "comment": "If true, calling the tool repeatedly with the same arguments\nwill have no additional effect on the its environment.\n\n(This property is meaningful only when `readOnlyHint == false`)\n\nDefault: false",
+          "typeNode": {
+            "kind": "SimpleType",
+            "text": "boolean"
+          }
+        },
+        {
+          "name": "openWorldHint",
+          "type": "boolean",
+          "optional": true,
+          "comment": "If true, this tool may interact with an \"open world\" of external\nentities. If false, the tool's domain of interaction is closed.\nFor example, the world of a web search tool is open, whereas that\nof a memory tool is not.\n\nDefault: true",
+          "typeNode": {
+            "kind": "SimpleType",
+            "text": "boolean"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "Tool",
+    "comment": "Definition for a tool the client can call.",
+    "type": "any",
+    "nodeText": "export interface Tool {\n  /**\n   * The name of the tool.\n   */\n  name: string;\n\n  /**\n   * A human-readable description of the tool.\n   *\n   * This can be used by clients to improve the LLM's understanding of available tools. It can be thought of like a \"hint\" to the model.\n   */\n  description?: string;\n\n  /**\n   * A JSON Schema object defining the expected parameters for the tool.\n   */\n  inputSchema: {\n    type: \"object\";\n    properties?: { [key: string]: object };\n    required?: string[];\n  };\n\n  /**\n   * Optional additional tool information.\n   */\n  annotations?: ToolAnnotations;\n}",
+    "astStructure": {
+      "kind": "Interface",
+      "name": "Tool",
+      "extends": [],
+      "members": [
+        {
+          "name": "name",
+          "type": "string",
+          "optional": false,
+          "comment": "The name of the tool.",
+          "typeNode": {
+            "kind": "SimpleType",
+            "text": "string"
+          }
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "optional": true,
+          "comment": "A human-readable description of the tool.\n\nThis can be used by clients to improve the LLM's understanding of available tools. It can be thought of like a \"hint\" to the model.",
+          "typeNode": {
+            "kind": "SimpleType",
+            "text": "string"
+          }
+        },
+        {
+          "name": "inputSchema",
+          "type": "{\n    type: \"object\";\n    properties?: { [key: string]: object };\n    required?: string[];\n  }",
+          "optional": false,
+          "comment": "A JSON Schema object defining the expected parameters for the tool.",
+          "typeNode": {
+            "kind": "TypeLiteral",
+            "members": [
+              {
+                "name": "type",
+                "type": "\"object\"",
+                "optional": false,
+                "comment": "",
+                "typeNode": {
+                  "kind": "LiteralType",
+                  "literal": "\"object\""
+                }
+              },
+              {
+                "name": "properties",
+                "type": "{ [key: string]: object }",
+                "optional": true,
+                "comment": "",
+                "typeNode": {
+                  "kind": "TypeLiteral",
+                  "members": []
+                }
+              },
+              {
+                "name": "required",
+                "type": "string[]",
+                "optional": true,
+                "comment": "",
+                "typeNode": {
+                  "kind": "ArrayType",
+                  "elementType": {
+                    "kind": "SimpleType",
+                    "text": "string"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "annotations",
+          "type": "ToolAnnotations",
+          "optional": true,
+          "comment": "Optional additional tool information.",
+          "typeNode": {
+            "kind": "TypeReference",
+            "typeName": "ToolAnnotations",
+            "typeArguments": []
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "ClientRequest",
+    "comment": "",
+    "type": "any",
+    "nodeText": "export type ClientRequest =\n  | PingRequest\n  | InitializeRequest\n  | CallToolRequest\n  | ListToolsRequest;",
+    "astStructure": {
+      "kind": "TypeAlias",
+      "name": "ClientRequest",
+      "type": "| PingRequest\n  | InitializeRequest\n  | CallToolRequest\n  | ListToolsRequest",
+      "typeNode": {
+        "kind": "UnionType",
+        "types": [
+          {
+            "kind": "TypeReference",
+            "typeName": "PingRequest",
+            "typeArguments": []
+          },
+          {
+            "kind": "TypeReference",
+            "typeName": "InitializeRequest",
+            "typeArguments": []
+          },
+          {
+            "kind": "TypeReference",
+            "typeName": "CallToolRequest",
+            "typeArguments": []
+          },
+          {
+            "kind": "TypeReference",
+            "typeName": "ListToolsRequest",
+            "typeArguments": []
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "ClientNotification",
+    "comment": "",
+    "type": "any",
+    "nodeText": "export type ClientNotification =\n  | InitializedNotification;",
+    "astStructure": {
+      "kind": "TypeAlias",
+      "name": "ClientNotification",
+      "type": "| InitializedNotification",
+      "typeNode": {
+        "kind": "UnionType",
+        "types": [
+          {
+            "kind": "TypeReference",
+            "typeName": "InitializedNotification",
+            "typeArguments": []
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "ClientResult",
+    "comment": "",
+    "type": "any",
+    "nodeText": "export type ClientResult = EmptyResult;",
+    "astStructure": {
+      "kind": "TypeAlias",
+      "name": "ClientResult",
+      "type": "EmptyResult",
+      "typeNode": {
+        "kind": "TypeReference",
+        "typeName": "EmptyResult",
+        "typeArguments": []
+      }
+    }
+  },
+  {
+    "name": "ServerRequest",
+    "comment": "",
+    "type": "any",
+    "nodeText": "export type ServerRequest = PingRequest;",
+    "astStructure": {
+      "kind": "TypeAlias",
+      "name": "ServerRequest",
+      "type": "PingRequest",
+      "typeNode": {
+        "kind": "TypeReference",
+        "typeName": "PingRequest",
+        "typeArguments": []
+      }
+    }
+  },
+  {
+    "name": "ServerNotification",
+    "comment": "",
+    "type": "any",
+    "nodeText": "export type ServerNotification =\n  | ToolListChangedNotification;",
+    "astStructure": {
+      "kind": "TypeAlias",
+      "name": "ServerNotification",
+      "type": "| ToolListChangedNotification",
+      "typeNode": {
+        "kind": "UnionType",
+        "types": [
+          {
+            "kind": "TypeReference",
+            "typeName": "ToolListChangedNotification",
+            "typeArguments": []
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "ServerResult",
+    "comment": "",
+    "type": "any",
+    "nodeText": "export type ServerResult =\n  | EmptyResult\n  | InitializeResult\n  | CallToolResult\n  | ListToolsResult;",
+    "astStructure": {
+      "kind": "TypeAlias",
+      "name": "ServerResult",
+      "type": "| EmptyResult\n  | InitializeResult\n  | CallToolResult\n  | ListToolsResult",
+      "typeNode": {
+        "kind": "UnionType",
+        "types": [
+          {
+            "kind": "TypeReference",
+            "typeName": "EmptyResult",
+            "typeArguments": []
+          },
+          {
+            "kind": "TypeReference",
+            "typeName": "InitializeResult",
+            "typeArguments": []
+          },
+          {
+            "kind": "TypeReference",
+            "typeName": "CallToolResult",
+            "typeArguments": []
+          },
+          {
+            "kind": "TypeReference",
+            "typeName": "ListToolsResult",
+            "typeArguments": []
+          }
+        ]
+      }
+    }
+  }
+]
