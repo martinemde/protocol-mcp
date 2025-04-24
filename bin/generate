@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'json'
+require 'fileutils'
+
+require_relative '../schema/generator'
+
+# This script parses a JSON schema file generated from TypeScript AST
+# and creates Ruby classes and modules that match the schema structure.
+
+# Main execution
+if __FILE__ == $PROGRAM_NAME
+  if ARGV.length < 2
+    puts "Usage: #{$PROGRAM_NAME} <json_file_path> <output_directory>"
+    exit 1
+  end
+
+  json_file_path = ARGV[0]
+  output_dir = ARGV[1]
+
+  generator = Schema::Generator.new(json_file_path, output_dir)
+  generator.generate
+  puts "Schema generation complete. Output directory: #{output_dir}"
+end
