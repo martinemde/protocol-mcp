@@ -5,8 +5,8 @@ module Schema
     class Interface < SchemaNode
       attr_reader :type_aliases, :members, :params_members
 
-      def initialize(item, type_aliases: [], force_module: false)
-        super(item)
+      def initialize(item, type_aliases: [], force_module: false, module_scope:)
+        super(item, module_scope:)
         raise "Not an Interface: #{item.inspect}" unless kind == 'Interface'
         @type_aliases = type_aliases
         @force_module = force_module
@@ -18,25 +18,25 @@ module Schema
       def extends_base_type? = base_type && MODULES.include?(base_type)
 
       def generate
-        super # add comments at top of file
-
-        generate_interface_class
+        super do |indented|
+          generate_interface_class(indented)
+        end
       end
 
-      def generate_interface_class
+      def generate_interface_class(indented)
         puts "generating interface class #{name}"
 
-        generate_class(ruby_code, name, comment, extends: base_type) do |indented|
-          generate_includes(indented)
+        generate_class(indented, name, comment, extends: base_type) do |indented2|
+          generate_includes(indented2)
 
           method_value = members[:method]&.literal
 
           # Split between Request/Notification classes and Normal classes
           if method_value
-            generate_request_body(indented, method_value)
+            generate_request_body(indented2, method_value)
           else
             # Normal classes accept all their properties
-            generate_normal_body(indented)
+            generate_normal_body(indented2)
           end
         end
       end
@@ -82,7 +82,6 @@ module Schema
           else
             indented2 << "super(params:)"
           end
-          indented2 << "freeze"
         end
       end
 
@@ -123,7 +122,6 @@ module Schema
 
           # Call super with appropriate parameters
           indented2 << "super(#{super_params.join(', ')})" if base_type
-          indented2 << "freeze"
         end
       end
 

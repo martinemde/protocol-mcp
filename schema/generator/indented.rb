@@ -3,6 +3,12 @@ module Schema
     class Indented
       def initialize(lines)
         @lines = lines
+
+        yield self if block_given?
+      end
+
+      def unindented
+        @lines
       end
 
       def <<(line)

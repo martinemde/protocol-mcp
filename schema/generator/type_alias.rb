@@ -1,4 +1,3 @@
-
 require_relative 'schema_node'
 
 module Schema
@@ -66,8 +65,8 @@ module Schema
     #   }
     # },
     class TypeAlias < SchemaNode
-      def initialize(item, **)
-        super
+      def initialize(item, module_scope:)
+        super(item, module_scope:)
         raise "Not a TypeAlias: #{item.inspect}" unless kind == 'TypeAlias'
       end
 
@@ -80,10 +79,10 @@ module Schema
       end
 
       def generate
-        super # add comments at top of file
-
-        generate_module(ruby_code, name, comment) do |indented|
-          generate_comment(indented, "Type alias: #{ast_structure[:type]}")
+        super do |indented|
+          generate_module(indented, name, comment) do |indented2|
+            generate_comment(indented2, "Type alias: #{ast_structure[:type]}")
+          end
         end
       end
     end
