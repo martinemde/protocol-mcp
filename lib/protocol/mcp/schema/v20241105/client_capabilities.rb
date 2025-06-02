@@ -26,25 +26,26 @@
 module Protocol::Mcp::Schema::V20241105
   # Capabilities a client may support. Known capabilities are defined here, in this schema, but this is not a closed set: any client can define its own, additional capabilities.
   class ClientCapabilities
+    include Protocol::Mcp::Schema::Type
 
     # Experimental, non-standard capabilities that the client supports.
-    attr_reader :experimental
+    schema_attribute :experimental
 
     # Present if the client supports listing roots.
-    attr_reader :roots
+    schema_attribute :roots
 
     # Present if the client supports sampling from an LLM.
-    attr_reader :sampling
+    schema_attribute :sampling
+
+    attr_reader :attributes
 
     # @param experimental [Hash] (nil)
     #   Experimental, non-standard capabilities that the client supports.
     # @param roots [Hash] (nil) Present if the client supports listing roots.
     # @param sampling [object] (nil)
     #   Present if the client supports sampling from an LLM.
-    def initialize(experimental: nil, roots: nil, sampling: nil)
-      @experimental = experimental
-      @roots = roots
-      @sampling = sampling
+    def initialize(experimental: nil, roots: nil, sampling: nil, **kwargs)
+      @attributes = { experimental: experimental, roots: roots, sampling: sampling }.merge(kwargs)
     end
   end
 end

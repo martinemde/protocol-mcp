@@ -79,6 +79,12 @@ module Schema
       end
 
       def generate
+        # Skip JSONRPC type aliases entirely
+        if name.start_with?('JSONRPC')
+          @skipped = true
+          return
+        end
+
         super do |indented|
           generate_module(indented, name, comment) do |indented2|
             generate_comment(indented2, "Type alias: #{ast_structure[:type]}")

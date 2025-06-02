@@ -21,13 +21,12 @@ module Protocol::Mcp::Schema::V20241105
     include ClientRequest
 
     # The URI of the resource to read. The URI can use any protocol; it is up to the server how to interpret it.
-    attr_reader :uri
+    schema_attribute :uri
 
     # @param uri [String]
     #   The URI of the resource to read. The URI can use any protocol; it is up to the server how to interpret it.
     #   @format uri
     def initialize(uri:)
-      @uri = uri
       params = {
         uri: uri,
       }

@@ -12,10 +12,9 @@ module Protocol::Mcp::Schema::V20250326
   class ListToolsResult < PaginatedResult
     include ServerResult
 
-    attr_reader :tools
+    schema_attribute :tools
 
     def initialize(tools:, **kwargs)
-      @tools = tools
       super(tools: tools, **kwargs)
     end
   end

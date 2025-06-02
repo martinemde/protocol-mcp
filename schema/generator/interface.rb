@@ -18,6 +18,12 @@ module Schema
       def extends_base_type? = base_type && MODULES.include?(base_type)
 
       def generate
+        # Skip JSONRPC classes entirely
+        if name.start_with?('JSONRPC')
+          @skipped = true
+          return
+        end
+
         super do |indented|
           generate_interface_class(indented)
         end
@@ -27,7 +33,7 @@ module Schema
         puts "generating interface class #{name}"
 
         generate_class(indented, name, comment, extends: base_type) do |indented2|
-          generate_includes(indented2)
+          generate_includes(indented2, base_type)
 
           method_value = members[:method]&.literal
 
@@ -44,7 +50,6 @@ module Schema
       def generate_request_body(indented, method_value)
         # For classes with params properties, create an initialize method that accepts each property
         initialize_kwargs = []
-        instance_vars = []
         params_hash = {}
 
         if params_members.empty?
@@ -55,7 +60,7 @@ module Schema
           return
         end
 
-        # Generate attr_reader for properties
+        # Generate schema_attribute for properties
         generate_attr_readers(indented, params_members)
 
         # Add comments and parameters for each property in params
@@ -63,14 +68,10 @@ module Schema
           generate_param_comment(indented, prop)
           kwarg = prop.initialize_kwarg
           initialize_kwargs << kwarg if kwarg
-          instance_vars << prop.initialize_assignment
           params_hash[prop.original_name] = prop.name
         end
 
         generate_method(indented, 'initialize', initialize_kwargs) do |indented2|
-          # Add instance variable assignments for all params properties
-          instance_vars.each { |var| indented2 << var }
-
           # Create a params hash from the individual properties
           if !params_hash.empty?
             generate_multiline_hash(indented2, 'params', params_hash)
@@ -87,27 +88,41 @@ module Schema
 
       def generate_normal_body(indented)
         initialize_kwargs = []
-        instance_vars = []
 
-        # Generate attr_reader for properties
+        # Generate schema_attribute for properties
         generate_attr_readers(indented, members)
+
+        # Add attr_reader for attributes only for base classes (no inheritance)
+        unless base_type
+          indented << "attr_reader :attributes"
+          indented << ""
+        end
 
         members.each do |name, prop|
           generate_param_comment(indented, prop)
 
           kwarg = prop.initialize_kwarg
           initialize_kwargs << kwarg if kwarg
-          instance_vars << prop.initialize_assignment
         end
 
-        if base_type
-          initialize_kwargs << "**kwargs"
-        end
+        # Always accept **kwargs for [key: string]: unknown pattern
+        initialize_kwargs << "**kwargs"
 
         # Generate method
         generate_method(indented, 'initialize', initialize_kwargs) do |indented2|
-          # Add instance variable assignments
-          instance_vars.each { |var| indented2 << var }
+          # Store additional attributes only for base classes
+          unless base_type
+            # Merge named parameters and kwargs into @attributes
+            if members.any?
+              attribute_assignments = []
+              members.each do |name, prop|
+                attribute_assignments << "#{prop.original_name}: #{name}"
+              end
+              indented2 << "@attributes = { #{attribute_assignments.join(', ')} }.merge(kwargs)"
+            else
+              indented2 << "@attributes = kwargs"
+            end
+          end
 
           # Call super with all properties when there's inheritance
           if base_type
@@ -126,7 +141,12 @@ module Schema
         generate_code_block(ruby_code, "class #{name}#{parent}", comment:, &block)
       end
 
-      def generate_includes(indented)
+      def generate_includes(indented, base_type)
+        # Include the Type module for schema_attribute functionality
+        unless base_type
+          indented << "include Protocol::Mcp::Schema::Type"
+        end
+
         type_aliases.each do |type_alias|
           indented << "include #{type_alias}"
         end
@@ -136,7 +156,7 @@ module Schema
       def generate_attr_readers(indented, props)
         props.each do |name, prop|
           generate_comment(indented, prop.comment_lines)
-          indented << "attr_reader :#{name}"
+          indented << "schema_attribute :#{name}"
           indented << ""
         end
       end

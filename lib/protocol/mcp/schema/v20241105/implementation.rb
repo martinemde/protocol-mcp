@@ -11,14 +11,16 @@
 module Protocol::Mcp::Schema::V20241105
   # Describes the name and version of an MCP implementation.
   class Implementation
+    include Protocol::Mcp::Schema::Type
 
-    attr_reader :name
+    schema_attribute :name
 
-    attr_reader :version
+    schema_attribute :version
 
-    def initialize(name:, version:)
-      @name = name
-      @version = version
+    attr_reader :attributes
+
+    def initialize(name:, version:, **kwargs)
+      @attributes = { name: name, version: version }.merge(kwargs)
     end
   end
 end

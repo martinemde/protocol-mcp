@@ -19,19 +19,20 @@ module Protocol::Mcp::Schema::V20250326
   # It is up to the client how best to render embedded resources for the benefit
   # of the LLM and/or the user.
   class EmbeddedResource
+    include Protocol::Mcp::Schema::Type
 
-    attr_reader :type
+    schema_attribute :type
 
-    attr_reader :resource
+    schema_attribute :resource
 
     # Optional annotations for the client.
-    attr_reader :annotations
+    schema_attribute :annotations
+
+    attr_reader :attributes
 
     # @param annotations [Annotations] (nil) Optional annotations for the client.
-    def initialize(resource:, annotations: nil)
-      @type = "resource"
-      @resource = resource
-      @annotations = annotations
+    def initialize(resource:, annotations: nil, **kwargs)
+      @attributes = { type: type, resource: resource, annotations: annotations }.merge(kwargs)
     end
   end
 end

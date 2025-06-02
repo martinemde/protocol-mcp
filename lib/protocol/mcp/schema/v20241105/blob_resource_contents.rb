@@ -16,13 +16,12 @@ module Protocol::Mcp::Schema::V20241105
   class BlobResourceContents < ResourceContents
 
     # A base64-encoded string representing the binary data of the item.
-    attr_reader :blob
+    schema_attribute :blob
 
     # @param blob [String]
     #   A base64-encoded string representing the binary data of the item.
     #   @format byte
     def initialize(blob:, **kwargs)
-      @blob = blob
       super(blob: blob, **kwargs)
     end
   end

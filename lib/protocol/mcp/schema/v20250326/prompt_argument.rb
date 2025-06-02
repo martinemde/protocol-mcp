@@ -21,23 +21,24 @@
 module Protocol::Mcp::Schema::V20250326
   # Describes an argument that a prompt can accept.
   class PromptArgument
+    include Protocol::Mcp::Schema::Type
 
     # The name of the argument.
-    attr_reader :name
+    schema_attribute :name
 
     # A human-readable description of the argument.
-    attr_reader :description
+    schema_attribute :description
 
     # Whether this argument must be provided.
-    attr_reader :required
+    schema_attribute :required
+
+    attr_reader :attributes
 
     # @param name [String] The name of the argument.
     # @param description [String] (nil) A human-readable description of the argument.
     # @param required [Boolean] (nil) Whether this argument must be provided.
-    def initialize(name:, description: nil, required: nil)
-      @name = name
-      @description = description
-      @required = required
+    def initialize(name:, description: nil, required: nil, **kwargs)
+      @attributes = { name: name, description: description, required: required }.merge(kwargs)
     end
   end
 end

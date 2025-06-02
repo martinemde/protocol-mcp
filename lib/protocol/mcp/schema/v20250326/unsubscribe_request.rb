@@ -21,12 +21,11 @@ module Protocol::Mcp::Schema::V20250326
     include ClientRequest
 
     # The URI of the resource to unsubscribe from.
-    attr_reader :uri
+    schema_attribute :uri
 
     # @param uri [String] The URI of the resource to unsubscribe from.
     #   @format uri
     def initialize(uri:)
-      @uri = uri
       params = {
         uri: uri,
       }

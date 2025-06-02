@@ -39,25 +39,28 @@
 module Protocol::Mcp::Schema::V20250326
   # A known resource that the server is capable of reading.
   class Resource
+    include Protocol::Mcp::Schema::Type
 
     # The URI of this resource.
-    attr_reader :uri
+    schema_attribute :uri
 
     # A human-readable name for this resource.
     # 
     # This can be used by clients to populate UI elements.
-    attr_reader :name
+    schema_attribute :name
 
     # A description of what this resource represents.
     # 
     # This can be used by clients to improve the LLM's understanding of available resources. It can be thought of like a "hint" to the model.
-    attr_reader :description
+    schema_attribute :description
 
     # The MIME type of this resource, if known.
-    attr_reader :mime_type
+    schema_attribute :mime_type
 
     # Optional annotations for the client.
-    attr_reader :annotations
+    schema_attribute :annotations
+
+    attr_reader :attributes
 
     # @param uri [String] The URI of this resource.
     #   @format uri
@@ -67,12 +70,8 @@ module Protocol::Mcp::Schema::V20250326
     #   This can be used by clients to improve the LLM's understanding of available resources. It can be thought of like a "hint" to the model.
     # @param mime_type [String] (nil) The MIME type of this resource, if known.
     # @param annotations [Annotations] (nil) Optional annotations for the client.
-    def initialize(uri:, name:, description: nil, mime_type: nil, annotations: nil)
-      @uri = uri
-      @name = name
-      @description = description
-      @mime_type = mime_type
-      @annotations = annotations
+    def initialize(uri:, name:, description: nil, mime_type: nil, annotations: nil, **kwargs)
+      @attributes = { uri: uri, name: name, description: description, mimeType: mime_type, annotations: annotations }.merge(kwargs)
     end
   end
 end

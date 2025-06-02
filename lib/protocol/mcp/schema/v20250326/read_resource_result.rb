@@ -12,10 +12,9 @@ module Protocol::Mcp::Schema::V20250326
   class ReadResourceResult < Result
     include ServerResult
 
-    attr_reader :contents
+    schema_attribute :contents
 
     def initialize(contents:, **kwargs)
-      @contents = contents
       super(contents: contents, **kwargs)
     end
   end

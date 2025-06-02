@@ -34,20 +34,23 @@
 module Protocol::Mcp::Schema::V20250326
   # Definition for a tool the client can call.
   class Tool
+    include Protocol::Mcp::Schema::Type
 
     # The name of the tool.
-    attr_reader :name
+    schema_attribute :name
 
     # A human-readable description of the tool.
     # 
     # This can be used by clients to improve the LLM's understanding of available tools. It can be thought of like a "hint" to the model.
-    attr_reader :description
+    schema_attribute :description
 
     # A JSON Schema object defining the expected parameters for the tool.
-    attr_reader :input_schema
+    schema_attribute :input_schema
 
     # Optional additional tool information.
-    attr_reader :annotations
+    schema_attribute :annotations
+
+    attr_reader :attributes
 
     # @param name [String] The name of the tool.
     # @param description [String] (nil) A human-readable description of the tool.
@@ -55,11 +58,8 @@ module Protocol::Mcp::Schema::V20250326
     # @param input_schema [Hash]
     #   A JSON Schema object defining the expected parameters for the tool.
     # @param annotations [ToolAnnotations] (nil) Optional additional tool information.
-    def initialize(name:, description: nil, input_schema:, annotations: nil)
-      @name = name
-      @description = description
-      @input_schema = input_schema
-      @annotations = annotations
+    def initialize(name:, description: nil, input_schema:, annotations: nil, **kwargs)
+      @attributes = { name: name, description: description, inputSchema: input_schema, annotations: annotations }.merge(kwargs)
     end
   end
 end

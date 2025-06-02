@@ -27,13 +27,13 @@ module Protocol::Mcp::Schema::V20250326
     include ServerNotification
 
     # The severity of this log message.
-    attr_reader :level
+    schema_attribute :level
 
     # An optional name of the logger issuing this message.
-    attr_reader :logger
+    schema_attribute :logger
 
     # The data to be logged, such as a string message or an object. Any JSON serializable type is allowed here.
-    attr_reader :data
+    schema_attribute :data
 
     # @param level [LoggingLevel] The severity of this log message.
     # @param logger [String] (nil)
@@ -41,9 +41,6 @@ module Protocol::Mcp::Schema::V20250326
     # @param data [Object]
     #   The data to be logged, such as a string message or an object. Any JSON serializable type is allowed here.
     def initialize(level:, logger: nil, data:)
-      @level = level
-      @logger = logger
-      @data = data
       params = {
         level: level,
         logger: logger,

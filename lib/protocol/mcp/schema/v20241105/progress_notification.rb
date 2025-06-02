@@ -32,13 +32,13 @@ module Protocol::Mcp::Schema::V20241105
     include ServerNotification
 
     # The progress token which was given in the initial request, used to associate this notification with the request that is proceeding.
-    attr_reader :progress_token
+    schema_attribute :progress_token
 
     # The progress thus far. This should increase every time progress is made, even if the total is unknown.
-    attr_reader :progress
+    schema_attribute :progress
 
     # Total number of items to process (or total progress required), if known.
-    attr_reader :total
+    schema_attribute :total
 
     # @param progress_token [ProgressToken]
     #   The progress token which was given in the initial request, used to associate this notification with the request that is proceeding.
@@ -47,9 +47,6 @@ module Protocol::Mcp::Schema::V20241105
     # @param total [Numeric] (nil)
     #   Total number of items to process (or total progress required), if known.
     def initialize(progress_token:, progress:, total: nil)
-      @progress_token = progress_token
-      @progress = progress
-      @total = total
       params = {
         progressToken: progress_token,
         progress: progress,

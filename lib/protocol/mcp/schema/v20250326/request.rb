@@ -18,14 +18,16 @@
 # ```
 module Protocol::Mcp::Schema::V20250326
   class Request
+    include Protocol::Mcp::Schema::Type
 
-    attr_reader :method
+    schema_attribute :method
 
-    attr_reader :params
+    schema_attribute :params
 
-    def initialize(method:, params: nil)
-      @method = method
-      @params = params
+    attr_reader :attributes
+
+    def initialize(method:, params: nil, **kwargs)
+      @attributes = { method: method, params: params }.merge(kwargs)
     end
   end
 end

@@ -21,25 +21,26 @@
 module Protocol::Mcp::Schema::V20241105
   # A prompt or prompt template that the server offers.
   class Prompt
+    include Protocol::Mcp::Schema::Type
 
     # The name of the prompt or prompt template.
-    attr_reader :name
+    schema_attribute :name
 
     # An optional description of what this prompt provides
-    attr_reader :description
+    schema_attribute :description
 
     # A list of arguments to use for templating the prompt.
-    attr_reader :arguments
+    schema_attribute :arguments
+
+    attr_reader :attributes
 
     # @param name [String] The name of the prompt or prompt template.
     # @param description [String] (nil)
     #   An optional description of what this prompt provides
     # @param arguments [Array<PromptArgument>] (nil)
     #   A list of arguments to use for templating the prompt.
-    def initialize(name:, description: nil, arguments: nil)
-      @name = name
-      @description = description
-      @arguments = arguments
+    def initialize(name:, description: nil, arguments: nil, **kwargs)
+      @attributes = { name: name, description: description, arguments: arguments }.merge(kwargs)
     end
   end
 end

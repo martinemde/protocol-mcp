@@ -28,15 +28,13 @@ module Protocol::Mcp::Schema::V20250326
   class CompleteRequest < Request
     include ClientRequest
 
-    attr_reader :ref
+    schema_attribute :ref
 
     # The argument's information
-    attr_reader :argument
+    schema_attribute :argument
 
     # @param argument [Hash] The argument's information
     def initialize(ref:, argument:)
-      @ref = ref
-      @argument = argument
       params = {
         ref: ref,
         argument: argument,

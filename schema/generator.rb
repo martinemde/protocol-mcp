@@ -106,7 +106,8 @@ module Schema
         type_alias = TypeAlias.new(item, module_scope:)
         type_alias.generate
         index_type_alias(type_alias, index)
-        @generated_files[type_alias.name] = type_alias.write(@output_dir)
+        file_path = type_alias.write(@output_dir)
+        @generated_files[type_alias.name] = file_path if file_path
       end
     end
 
@@ -124,7 +125,8 @@ module Schema
         module_scope = "#{@scope}::#{@version_module}"
         interface = Interface.new(item, type_aliases:, force_module: is_module, module_scope:)
         interface.generate
-        @generated_files[interface.name] = interface.write(@output_dir)
+        file_path = interface.write(@output_dir)
+        @generated_files[interface.name] = file_path if file_path
       end
     end
 

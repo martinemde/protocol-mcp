@@ -14,14 +14,16 @@ module Protocol::Mcp::Schema::V20241105
   # This is similar to `SamplingMessage`, but also supports the embedding of
   # resources from the MCP server.
   class PromptMessage
+    include Protocol::Mcp::Schema::Type
 
-    attr_reader :role
+    schema_attribute :role
 
-    attr_reader :content
+    schema_attribute :content
 
-    def initialize(role:, content:)
-      @role = role
-      @content = content
+    attr_reader :attributes
+
+    def initialize(role:, content:, **kwargs)
+      @attributes = { role: role, content: content }.merge(kwargs)
     end
   end
 end

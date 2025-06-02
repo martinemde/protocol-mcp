@@ -28,18 +28,16 @@ module Protocol::Mcp::Schema::V20241105
   class CallToolResult < Result
     include ServerResult
 
-    attr_reader :content
+    schema_attribute :content
 
     # Whether the tool call ended in an error.
     # 
     # If not set, this is assumed to be false (the call was successful).
-    attr_reader :is_error
+    schema_attribute :is_error
 
     # @param is_error [Boolean] (nil) Whether the tool call ended in an error.
     #   If not set, this is assumed to be false (the call was successful).
     def initialize(content:, is_error: nil, **kwargs)
-      @content = content
-      @is_error = is_error
       super(content: content, is_error: is_error, **kwargs)
     end
   end

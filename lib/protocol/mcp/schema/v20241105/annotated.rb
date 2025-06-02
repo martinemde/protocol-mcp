@@ -30,11 +30,14 @@
 module Protocol::Mcp::Schema::V20241105
   # Base for objects that include optional annotations for the client. The client can use annotations to inform how objects are used or displayed
   class Annotated
+    include Protocol::Mcp::Schema::Type
 
-    attr_reader :annotations
+    schema_attribute :annotations
 
-    def initialize(annotations: nil)
-      @annotations = annotations
+    attr_reader :attributes
+
+    def initialize(annotations: nil, **kwargs)
+      @attributes = { annotations: annotations }.merge(kwargs)
     end
   end
 end

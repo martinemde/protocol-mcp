@@ -62,6 +62,7 @@ module Protocol::Mcp::Schema::V20250326
   # up to the client to decide how to interpret these preferences and how to
   # balance them against other considerations.
   class ModelPreferences
+    include Protocol::Mcp::Schema::Type
 
     # Optional hints to use for model selection.
     # 
@@ -70,22 +71,24 @@ module Protocol::Mcp::Schema::V20250326
     # 
     # The client SHOULD prioritize these hints over the numeric priorities, but
     # MAY still use the priorities to select from ambiguous matches.
-    attr_reader :hints
+    schema_attribute :hints
 
     # How much to prioritize cost when selecting a model. A value of 0 means cost
     # is not important, while a value of 1 means cost is the most important
     # factor.
-    attr_reader :cost_priority
+    schema_attribute :cost_priority
 
     # How much to prioritize sampling speed (latency) when selecting a model. A
     # value of 0 means speed is not important, while a value of 1 means speed is
     # the most important factor.
-    attr_reader :speed_priority
+    schema_attribute :speed_priority
 
     # How much to prioritize intelligence and capabilities when selecting a
     # model. A value of 0 means intelligence is not important, while a value of 1
     # means intelligence is the most important factor.
-    attr_reader :intelligence_priority
+    schema_attribute :intelligence_priority
+
+    attr_reader :attributes
 
     # @param hints [Array<ModelHint>] (nil) Optional hints to use for model selection.
     #   If multiple hints are specified, the client MUST evaluate them in order
@@ -110,11 +113,8 @@ module Protocol::Mcp::Schema::V20250326
     #   means intelligence is the most important factor.
     #   @minimum 0
     #   @maximum 1
-    def initialize(hints: nil, cost_priority: nil, speed_priority: nil, intelligence_priority: nil)
-      @hints = hints
-      @cost_priority = cost_priority
-      @speed_priority = speed_priority
-      @intelligence_priority = intelligence_priority
+    def initialize(hints: nil, cost_priority: nil, speed_priority: nil, intelligence_priority: nil, **kwargs)
+      @attributes = { hints: hints, costPriority: cost_priority, speedPriority: speed_priority, intelligencePriority: intelligence_priority }.merge(kwargs)
     end
   end
 end

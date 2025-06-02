@@ -13,14 +13,17 @@
 # ```
 module Protocol::Mcp::Schema::V20250326
   class Result
+    include Protocol::Mcp::Schema::Type
 
     # This result property is reserved by the protocol to allow clients and servers to attach additional metadata to their responses.
-    attr_reader :_meta
+    schema_attribute :_meta
+
+    attr_reader :attributes
 
     # @param _meta [Hash] (nil)
     #   This result property is reserved by the protocol to allow clients and servers to attach additional metadata to their responses.
-    def initialize(_meta: nil)
-      @_meta = _meta
+    def initialize(_meta: nil, **kwargs)
+      @attributes = { _meta: _meta }.merge(kwargs)
     end
   end
 end

@@ -48,21 +48,24 @@
 module Protocol::Mcp::Schema::V20241105
   # Capabilities that a server may support. Known capabilities are defined here, in this schema, but this is not a closed set: any server can define its own, additional capabilities.
   class ServerCapabilities
+    include Protocol::Mcp::Schema::Type
 
     # Experimental, non-standard capabilities that the server supports.
-    attr_reader :experimental
+    schema_attribute :experimental
 
     # Present if the server supports sending log messages to the client.
-    attr_reader :logging
+    schema_attribute :logging
 
     # Present if the server offers any prompt templates.
-    attr_reader :prompts
+    schema_attribute :prompts
 
     # Present if the server offers any resources to read.
-    attr_reader :resources
+    schema_attribute :resources
 
     # Present if the server offers any tools to call.
-    attr_reader :tools
+    schema_attribute :tools
+
+    attr_reader :attributes
 
     # @param experimental [Hash] (nil)
     #   Experimental, non-standard capabilities that the server supports.
@@ -73,12 +76,8 @@ module Protocol::Mcp::Schema::V20241105
     # @param resources [Hash] (nil)
     #   Present if the server offers any resources to read.
     # @param tools [Hash] (nil) Present if the server offers any tools to call.
-    def initialize(experimental: nil, logging: nil, prompts: nil, resources: nil, tools: nil)
-      @experimental = experimental
-      @logging = logging
-      @prompts = prompts
-      @resources = resources
-      @tools = tools
+    def initialize(experimental: nil, logging: nil, prompts: nil, resources: nil, tools: nil, **kwargs)
+      @attributes = { experimental: experimental, logging: logging, prompts: prompts, resources: resources, tools: tools }.merge(kwargs)
     end
   end
 end

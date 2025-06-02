@@ -14,12 +14,11 @@ module Protocol::Mcp::Schema::V20241105
   class TextResourceContents < ResourceContents
 
     # The text of the item. This must only be set if the item can actually be represented as text (not binary data).
-    attr_reader :text
+    schema_attribute :text
 
     # @param text [String]
     #   The text of the item. This must only be set if the item can actually be represented as text (not binary data).
     def initialize(text:, **kwargs)
-      @text = text
       super(text: text, **kwargs)
     end
   end

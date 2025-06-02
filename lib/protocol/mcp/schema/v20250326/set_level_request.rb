@@ -19,12 +19,11 @@ module Protocol::Mcp::Schema::V20250326
     include ClientRequest
 
     # The level of logging that the client wants to receive from the server. The server should send all logs at this level and higher (i.e., more severe) to the client as notifications/message.
-    attr_reader :level
+    schema_attribute :level
 
     # @param level [LoggingLevel]
     #   The level of logging that the client wants to receive from the server. The server should send all logs at this level and higher (i.e., more severe) to the client as notifications/message.
     def initialize(level:)
-      @level = level
       params = {
         level: level,
       }

@@ -20,21 +20,22 @@
 module Protocol::Mcp::Schema::V20250326
   # Text provided to or from an LLM.
   class TextContent
+    include Protocol::Mcp::Schema::Type
 
-    attr_reader :type
+    schema_attribute :type
 
     # The text content of the message.
-    attr_reader :text
+    schema_attribute :text
 
     # Optional annotations for the client.
-    attr_reader :annotations
+    schema_attribute :annotations
+
+    attr_reader :attributes
 
     # @param text [String] The text content of the message.
     # @param annotations [Annotations] (nil) Optional annotations for the client.
-    def initialize(text:, annotations: nil)
-      @type = "text"
-      @text = text
-      @annotations = annotations
+    def initialize(text:, annotations: nil, **kwargs)
+      @attributes = { type: type, text: text, annotations: annotations }.merge(kwargs)
     end
   end
 end

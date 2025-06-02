@@ -15,15 +15,13 @@ module Protocol::Mcp::Schema::V20241105
   # Text provided to or from an LLM.
   class TextContent < Annotated
 
-    attr_reader :type
+    schema_attribute :type
 
     # The text content of the message.
-    attr_reader :text
+    schema_attribute :text
 
     # @param text [String] The text content of the message.
     def initialize(text:, **kwargs)
-      @type = "text"
-      @text = text
       super(type: type, text: text, **kwargs)
     end
   end

@@ -14,10 +14,9 @@ module Protocol::Mcp::Schema::V20241105
   class ListRootsResult < Result
     include ClientResult
 
-    attr_reader :roots
+    schema_attribute :roots
 
     def initialize(roots:, **kwargs)
-      @roots = roots
       super(roots: roots, **kwargs)
     end
   end

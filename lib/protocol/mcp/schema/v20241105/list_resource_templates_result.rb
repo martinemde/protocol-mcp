@@ -12,10 +12,9 @@ module Protocol::Mcp::Schema::V20241105
   class ListResourceTemplatesResult < PaginatedResult
     include ServerResult
 
-    attr_reader :resource_templates
+    schema_attribute :resource_templates
 
     def initialize(resource_templates:, **kwargs)
-      @resource_templates = resource_templates
       super(resource_templates: resource_templates, **kwargs)
     end
   end

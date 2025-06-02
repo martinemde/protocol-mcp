@@ -21,22 +21,19 @@ module Protocol::Mcp::Schema::V20241105
   # An image provided to or from an LLM.
   class ImageContent < Annotated
 
-    attr_reader :type
+    schema_attribute :type
 
     # The base64-encoded image data.
-    attr_reader :data
+    schema_attribute :data
 
     # The MIME type of the image. Different providers may support different image types.
-    attr_reader :mime_type
+    schema_attribute :mime_type
 
     # @param data [String] The base64-encoded image data.
     #   @format byte
     # @param mime_type [String]
     #   The MIME type of the image. Different providers may support different image types.
     def initialize(data:, mime_type:, **kwargs)
-      @type = "image"
-      @data = data
-      @mime_type = mime_type
       super(type: type, data: data, mime_type: mime_type, **kwargs)
     end
   end

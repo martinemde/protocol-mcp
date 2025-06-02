@@ -16,13 +16,11 @@ module Protocol::Mcp::Schema::V20250326
   class CallToolRequest < Request
     include ClientRequest
 
-    attr_reader :name
+    schema_attribute :name
 
-    attr_reader :arguments
+    schema_attribute :arguments
 
     def initialize(name:, arguments: nil)
-      @name = name
-      @arguments = arguments
       params = {
         name: name,
         arguments: arguments,

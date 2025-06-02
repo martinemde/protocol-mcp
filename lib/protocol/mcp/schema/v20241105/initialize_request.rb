@@ -21,18 +21,15 @@ module Protocol::Mcp::Schema::V20241105
     include ClientRequest
 
     # The latest version of the Model Context Protocol that the client supports. The client MAY decide to support older versions as well.
-    attr_reader :protocol_version
+    schema_attribute :protocol_version
 
-    attr_reader :capabilities
+    schema_attribute :capabilities
 
-    attr_reader :client_info
+    schema_attribute :client_info
 
     # @param protocol_version [String]
     #   The latest version of the Model Context Protocol that the client supports. The client MAY decide to support older versions as well.
     def initialize(protocol_version:, capabilities:, client_info:)
-      @protocol_version = protocol_version
-      @capabilities = capabilities
-      @client_info = client_info
       params = {
         protocolVersion: protocol_version,
         capabilities: capabilities,

@@ -12,10 +12,9 @@ module Protocol::Mcp::Schema::V20250326
   class ListPromptsResult < PaginatedResult
     include ServerResult
 
-    attr_reader :prompts
+    schema_attribute :prompts
 
     def initialize(prompts:, **kwargs)
-      @prompts = prompts
       super(prompts: prompts, **kwargs)
     end
   end

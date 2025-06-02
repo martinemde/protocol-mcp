@@ -16,10 +16,9 @@
 module Protocol::Mcp::Schema::V20250326
   class PaginatedRequest < Request
 
-    attr_reader :params
+    schema_attribute :params
 
     def initialize(params: nil, **kwargs)
-      @params = params
       super(params: params, **kwargs)
     end
   end

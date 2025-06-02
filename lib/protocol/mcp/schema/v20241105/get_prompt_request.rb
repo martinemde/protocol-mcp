@@ -23,16 +23,14 @@ module Protocol::Mcp::Schema::V20241105
     include ClientRequest
 
     # The name of the prompt or prompt template.
-    attr_reader :name
+    schema_attribute :name
 
     # Arguments to use for templating the prompt.
-    attr_reader :arguments
+    schema_attribute :arguments
 
     # @param name [String] The name of the prompt or prompt template.
     # @param arguments [Hash] (nil) Arguments to use for templating the prompt.
     def initialize(name:, arguments: nil)
-      @name = name
-      @arguments = arguments
       params = {
         name: name,
         arguments: arguments,

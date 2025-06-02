@@ -35,18 +35,16 @@ module Protocol::Mcp::Schema::V20241105
     # The ID of the request to cancel.
     # 
     # This MUST correspond to the ID of a request previously issued in the same direction.
-    attr_reader :request_id
+    schema_attribute :request_id
 
     # An optional string describing the reason for the cancellation. This MAY be logged or presented to the user.
-    attr_reader :reason
+    schema_attribute :reason
 
     # @param request_id [RequestId] The ID of the request to cancel.
     #   This MUST correspond to the ID of a request previously issued in the same direction.
     # @param reason [String] (nil)
     #   An optional string describing the reason for the cancellation. This MAY be logged or presented to the user.
     def initialize(request_id:, reason: nil)
-      @request_id = request_id
-      @reason = reason
       params = {
         requestId: request_id,
         reason: reason,

@@ -14,16 +14,18 @@
 module Protocol::Mcp::Schema::V20241105
   # Identifies a prompt.
   class PromptReference
+    include Protocol::Mcp::Schema::Type
 
-    attr_reader :type
+    schema_attribute :type
 
     # The name of the prompt or prompt template
-    attr_reader :name
+    schema_attribute :name
+
+    attr_reader :attributes
 
     # @param name [String] The name of the prompt or prompt template
-    def initialize(name:)
-      @type = "ref/prompt"
-      @name = name
+    def initialize(name:, **kwargs)
+      @attributes = { type: type, name: name }.merge(kwargs)
     end
   end
 end

@@ -11,14 +11,16 @@
 module Protocol::Mcp::Schema::V20250326
   # Describes a message issued to or received from an LLM API.
   class SamplingMessage
+    include Protocol::Mcp::Schema::Type
 
-    attr_reader :role
+    schema_attribute :role
 
-    attr_reader :content
+    schema_attribute :content
 
-    def initialize(role:, content:)
-      @role = role
-      @content = content
+    attr_reader :attributes
+
+    def initialize(role:, content:, **kwargs)
+      @attributes = { role: role, content: content }.merge(kwargs)
     end
   end
 end

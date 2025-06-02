@@ -40,26 +40,26 @@ module Protocol::Mcp::Schema::V20250326
   class CreateMessageRequest < Request
     include ServerRequest
 
-    attr_reader :messages
+    schema_attribute :messages
 
     # The server's preferences for which model to select. The client MAY ignore these preferences.
-    attr_reader :model_preferences
+    schema_attribute :model_preferences
 
     # An optional system prompt the server wants to use for sampling. The client MAY modify or omit this prompt.
-    attr_reader :system_prompt
+    schema_attribute :system_prompt
 
     # A request to include context from one or more MCP servers (including the caller), to be attached to the prompt. The client MAY ignore this request.
-    attr_reader :include_context
+    schema_attribute :include_context
 
-    attr_reader :temperature
+    schema_attribute :temperature
 
     # The maximum number of tokens to sample, as requested by the server. The client MAY choose to sample fewer tokens than requested.
-    attr_reader :max_tokens
+    schema_attribute :max_tokens
 
-    attr_reader :stop_sequences
+    schema_attribute :stop_sequences
 
     # Optional metadata to pass through to the LLM provider. The format of this metadata is provider-specific.
-    attr_reader :metadata
+    schema_attribute :metadata
 
     # @param model_preferences [ModelPreferences] (nil)
     #   The server's preferences for which model to select. The client MAY ignore these preferences.
@@ -72,14 +72,6 @@ module Protocol::Mcp::Schema::V20250326
     # @param metadata [object] (nil)
     #   Optional metadata to pass through to the LLM provider. The format of this metadata is provider-specific.
     def initialize(messages:, model_preferences: nil, system_prompt: nil, include_context: nil, temperature: nil, max_tokens:, stop_sequences: nil, metadata: nil)
-      @messages = messages
-      @model_preferences = model_preferences
-      @system_prompt = system_prompt
-      @include_context = include_context
-      @temperature = temperature
-      @max_tokens = max_tokens
-      @stop_sequences = stop_sequences
-      @metadata = metadata
       params = {
         messages: messages,
         modelPreferences: model_preferences,

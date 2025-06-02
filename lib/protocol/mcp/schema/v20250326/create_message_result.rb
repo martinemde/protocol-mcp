@@ -20,16 +20,14 @@ module Protocol::Mcp::Schema::V20250326
     include ClientResult
 
     # The name of the model that generated the message.
-    attr_reader :model
+    schema_attribute :model
 
     # The reason why sampling stopped, if known.
-    attr_reader :stop_reason
+    schema_attribute :stop_reason
 
     # @param model [String] The name of the model that generated the message.
     # @param stop_reason [endTurn, stopSequence, maxTokens, String] (nil) The reason why sampling stopped, if known.
     def initialize(model:, stop_reason: nil, **kwargs)
-      @model = model
-      @stop_reason = stop_reason
       super(model: model, stop_reason: stop_reason, **kwargs)
     end
   end

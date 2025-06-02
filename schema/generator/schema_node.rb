@@ -11,16 +11,18 @@ module Schema
       include RubyType
 
       # These become modules that get mixed into the generated classes
-      MODULES = %w[Request Notification Response Error Result PaginatedRequest PaginatedResult].freeze
+      MODULES = %w[Request Notification Response Error].freeze
 
       attr_reader :item
       attr_reader :ruby_code
       attr_reader :module_scope
+      attr_reader :skipped
 
       def initialize(item, module_scope:, **)
         @item = item
         @ruby_code = []
         @module_scope = module_scope
+        @skipped = false
       end
 
       def name = @item[:name]
@@ -45,6 +47,9 @@ module Schema
       end
 
       def write(output_dir)
+        # Don't write files that were skipped during generation
+        return nil if @skipped
+
         # Write the generated code to a file
         file_path = File.join(output_dir, "#{snake_case(name)}.rb")
         File.write(file_path, ruby_code.join("\n"))

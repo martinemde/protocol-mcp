@@ -15,13 +15,11 @@ module Protocol::Mcp::Schema::V20241105
   # of the LLM and/or the user.
   class EmbeddedResource < Annotated
 
-    attr_reader :type
+    schema_attribute :type
 
-    attr_reader :resource
+    schema_attribute :resource
 
     def initialize(resource:, **kwargs)
-      @type = "resource"
-      @resource = resource
       super(type: type, resource: resource, **kwargs)
     end
   end

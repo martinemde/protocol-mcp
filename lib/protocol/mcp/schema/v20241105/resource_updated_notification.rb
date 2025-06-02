@@ -21,13 +21,12 @@ module Protocol::Mcp::Schema::V20241105
     include ServerNotification
 
     # The URI of the resource that has been updated. This might be a sub-resource of the one that the client actually subscribed to.
-    attr_reader :uri
+    schema_attribute :uri
 
     # @param uri [String]
     #   The URI of the resource that has been updated. This might be a sub-resource of the one that the client actually subscribed to.
     #   @format uri
     def initialize(uri:)
-      @uri = uri
       params = {
         uri: uri,
       }

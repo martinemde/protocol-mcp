@@ -25,10 +25,9 @@ module Protocol::Mcp::Schema::V20241105
   class CompleteResult < Result
     include ServerResult
 
-    attr_reader :completion
+    schema_attribute :completion
 
     def initialize(completion:, **kwargs)
-      @completion = completion
       super(completion: completion, **kwargs)
     end
   end
