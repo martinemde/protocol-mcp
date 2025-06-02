@@ -25,7 +25,7 @@ module Protocol::Mcp::Schema::V20241105
     def initialize(description: nil, messages:, **kwargs)
       @description = description
       @messages = messages
-      super(**kwargs)
+      super(description: description, messages: messages, **kwargs)
     end
   end
 end

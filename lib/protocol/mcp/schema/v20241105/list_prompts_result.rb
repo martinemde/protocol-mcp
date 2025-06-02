@@ -16,7 +16,7 @@ module Protocol::Mcp::Schema::V20241105
 
     def initialize(prompts:, **kwargs)
       @prompts = prompts
-      super(**kwargs)
+      super(prompts: prompts, **kwargs)
     end
   end
 end

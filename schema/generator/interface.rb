@@ -88,7 +88,6 @@ module Schema
       def generate_normal_body(indented)
         initialize_kwargs = []
         instance_vars = []
-        super_params = []
 
         # Generate attr_reader for properties
         generate_attr_readers(indented, members)
@@ -101,18 +100,8 @@ module Schema
           instance_vars << prop.initialize_assignment
         end
 
-        # Get parameters to pass to super
-        base_props = members.select { |name, _| !base_type || name.to_s == base_type.downcase }
-        base_props.each do |_, prop|
-          prop.members.each do |name, member|
-            param_name = member.name
-            super_params << "#{param_name}: #{param_name}"
-          end
-        end
-
         if base_type
           initialize_kwargs << "**kwargs"
-          super_params << "**kwargs"
         end
 
         # Generate method
@@ -120,8 +109,15 @@ module Schema
           # Add instance variable assignments
           instance_vars.each { |var| indented2 << var }
 
-          # Call super with appropriate parameters
-          indented2 << "super(#{super_params.join(', ')})" if base_type
+          # Call super with all properties when there's inheritance
+          if base_type
+            super_params = []
+            members.each do |name, prop|
+              super_params << "#{name}: #{name}"
+            end
+            super_params << "**kwargs"
+            indented2 << "super(#{super_params.join(', ')})"
+          end
         end
       end
 

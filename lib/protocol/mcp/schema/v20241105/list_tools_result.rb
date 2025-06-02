@@ -16,7 +16,7 @@ module Protocol::Mcp::Schema::V20241105
 
     def initialize(tools:, **kwargs)
       @tools = tools
-      super(**kwargs)
+      super(tools: tools, **kwargs)
     end
   end
 end

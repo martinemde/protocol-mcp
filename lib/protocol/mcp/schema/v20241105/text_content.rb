@@ -24,7 +24,7 @@ module Protocol::Mcp::Schema::V20241105
     def initialize(text:, **kwargs)
       @type = "text"
       @text = text
-      super(**kwargs)
+      super(type: type, text: text, **kwargs)
     end
   end
 end

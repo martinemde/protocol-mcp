@@ -16,7 +16,7 @@ module Protocol::Mcp::Schema::V20241105
 
     def initialize(contents:, **kwargs)
       @contents = contents
-      super(**kwargs)
+      super(contents: contents, **kwargs)
     end
   end
 end

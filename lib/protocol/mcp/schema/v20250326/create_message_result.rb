@@ -30,7 +30,7 @@ module Protocol::Mcp::Schema::V20250326
     def initialize(model:, stop_reason: nil, **kwargs)
       @model = model
       @stop_reason = stop_reason
-      super(**kwargs)
+      super(model: model, stop_reason: stop_reason, **kwargs)
     end
   end
 end

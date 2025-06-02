@@ -23,7 +23,7 @@ module Protocol::Mcp::Schema::V20250326
     #   @format byte
     def initialize(blob:, **kwargs)
       @blob = blob
-      super(**kwargs)
+      super(blob: blob, **kwargs)
     end
   end
 end

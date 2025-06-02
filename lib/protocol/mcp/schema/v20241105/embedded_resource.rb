@@ -22,7 +22,7 @@ module Protocol::Mcp::Schema::V20241105
     def initialize(resource:, **kwargs)
       @type = "resource"
       @resource = resource
-      super(**kwargs)
+      super(type: type, resource: resource, **kwargs)
     end
   end
 end

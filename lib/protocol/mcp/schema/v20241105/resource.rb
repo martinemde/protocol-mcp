@@ -79,7 +79,7 @@ module Protocol::Mcp::Schema::V20241105
       @description = description
       @mime_type = mime_type
       @size = size
-      super(**kwargs)
+      super(uri: uri, name: name, description: description, mime_type: mime_type, size: size, **kwargs)
     end
   end
 end

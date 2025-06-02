@@ -40,7 +40,7 @@ module Protocol::Mcp::Schema::V20250326
     def initialize(content:, is_error: nil, **kwargs)
       @content = content
       @is_error = is_error
-      super(**kwargs)
+      super(content: content, is_error: is_error, **kwargs)
     end
   end
 end

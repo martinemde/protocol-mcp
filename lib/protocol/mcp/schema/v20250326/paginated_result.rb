@@ -23,7 +23,7 @@ module Protocol::Mcp::Schema::V20250326
     #   If present, there may be more results available.
     def initialize(next_cursor: nil, **kwargs)
       @next_cursor = next_cursor
-      super(**kwargs)
+      super(next_cursor: next_cursor, **kwargs)
     end
   end
 end

@@ -29,7 +29,7 @@ module Protocol::Mcp::Schema::V20250326
 
     def initialize(completion:, **kwargs)
       @completion = completion
-      super(**kwargs)
+      super(completion: completion, **kwargs)
     end
   end
 end

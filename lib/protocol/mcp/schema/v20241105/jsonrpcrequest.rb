@@ -20,7 +20,7 @@ module Protocol::Mcp::Schema::V20241105
     def initialize(jsonrpc:, id:, **kwargs)
       @jsonrpc = jsonrpc
       @id = id
-      super(**kwargs)
+      super(jsonrpc: jsonrpc, id: id, **kwargs)
     end
   end
 end

@@ -20,7 +20,7 @@ module Protocol::Mcp::Schema::V20241105
 
     def initialize(params: nil, **kwargs)
       @params = params
-      super(**kwargs)
+      super(params: params, **kwargs)
     end
   end
 end

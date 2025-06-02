@@ -16,7 +16,7 @@ module Protocol::Mcp::Schema::V20250326
 
     def initialize(resources:, **kwargs)
       @resources = resources
-      super(**kwargs)
+      super(resources: resources, **kwargs)
     end
   end
 end

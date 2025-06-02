@@ -16,7 +16,7 @@ module Protocol::Mcp::Schema::V20241105
 
     def initialize(resource_templates:, **kwargs)
       @resource_templates = resource_templates
-      super(**kwargs)
+      super(resource_templates: resource_templates, **kwargs)
     end
   end
 end

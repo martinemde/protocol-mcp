@@ -37,7 +37,7 @@ module Protocol::Mcp::Schema::V20241105
       @type = "image"
       @data = data
       @mime_type = mime_type
-      super(**kwargs)
+      super(type: type, data: data, mime_type: mime_type, **kwargs)
     end
   end
 end

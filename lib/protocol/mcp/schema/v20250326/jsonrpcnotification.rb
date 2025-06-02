@@ -17,7 +17,7 @@ module Protocol::Mcp::Schema::V20250326
 
     def initialize(jsonrpc:, **kwargs)
       @jsonrpc = jsonrpc
-      super(**kwargs)
+      super(jsonrpc: jsonrpc, **kwargs)
     end
   end
 end

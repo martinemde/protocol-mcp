@@ -45,7 +45,7 @@ module Protocol::Mcp::Schema::V20241105
       @capabilities = capabilities
       @server_info = server_info
       @instructions = instructions
-      super(**kwargs)
+      super(protocol_version: protocol_version, capabilities: capabilities, server_info: server_info, instructions: instructions, **kwargs)
     end
   end
 end

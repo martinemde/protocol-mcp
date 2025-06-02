@@ -18,7 +18,7 @@ module Protocol::Mcp::Schema::V20250326
 
     def initialize(roots:, **kwargs)
       @roots = roots
-      super(**kwargs)
+      super(roots: roots, **kwargs)
     end
   end
 end
