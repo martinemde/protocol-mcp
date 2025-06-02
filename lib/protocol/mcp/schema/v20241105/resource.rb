@@ -41,6 +41,7 @@
 module Protocol::Mcp::Schema::V20241105
   # A known resource that the server is capable of reading.
   class Resource < Annotated
+    include Protocol::Mcp::Schema::Type
 
     # The URI of this resource.
     schema_attribute :uri

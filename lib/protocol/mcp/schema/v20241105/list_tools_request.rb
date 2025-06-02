@@ -10,6 +10,7 @@
 module Protocol::Mcp::Schema::V20241105
   # Sent from the client to request a list of tools the server has.
   class ListToolsRequest < PaginatedRequest
+    include Protocol::Mcp::Schema::Type
     include ClientRequest
 
     def initialize(**params)

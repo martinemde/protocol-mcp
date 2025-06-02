@@ -17,6 +17,7 @@
 module Protocol::Mcp::Schema::V20241105
   # The client's response to a sampling/create_message request from the server. The client should inform the user before returning the sampled message, to allow them to inspect the response (human in the loop) and decide whether to allow the server to see it.
   class CreateMessageResult < Result
+    include Protocol::Mcp::Schema::Type
     include ClientResult
 
     # The name of the model that generated the message.

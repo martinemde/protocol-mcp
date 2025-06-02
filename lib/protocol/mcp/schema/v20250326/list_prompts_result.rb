@@ -10,6 +10,7 @@
 module Protocol::Mcp::Schema::V20250326
   # The server's response to a prompts/list request from the client.
   class ListPromptsResult < PaginatedResult
+    include Protocol::Mcp::Schema::Type
     include ServerResult
 
     schema_attribute :prompts

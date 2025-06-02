@@ -34,6 +34,7 @@
 module Protocol::Mcp::Schema::V20241105
   # A template description for resources available on the server.
   class ResourceTemplate < Annotated
+    include Protocol::Mcp::Schema::Type
 
     # A URI template (according to RFC 6570) that can be used to construct resource URIs.
     schema_attribute :uri_template

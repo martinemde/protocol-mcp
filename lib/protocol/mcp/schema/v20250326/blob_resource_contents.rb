@@ -14,6 +14,7 @@
 # ```
 module Protocol::Mcp::Schema::V20250326
   class BlobResourceContents < ResourceContents
+    include Protocol::Mcp::Schema::Type
 
     # A base64-encoded string representing the binary data of the item.
     schema_attribute :blob

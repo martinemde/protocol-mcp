@@ -10,6 +10,7 @@
 module Protocol::Mcp::Schema::V20241105
   # This notification is sent from the client to the server after initialization has finished.
   class InitializedNotification < Notification
+    include Protocol::Mcp::Schema::Type
     include ClientNotification
 
     def initialize(**params)

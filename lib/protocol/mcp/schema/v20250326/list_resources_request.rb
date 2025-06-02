@@ -10,6 +10,7 @@
 module Protocol::Mcp::Schema::V20250326
   # Sent from the client to request a list of resources the server has.
   class ListResourcesRequest < PaginatedRequest
+    include Protocol::Mcp::Schema::Type
     include ClientRequest
 
     def initialize(**params)

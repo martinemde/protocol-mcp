@@ -12,6 +12,7 @@
 # ```
 module Protocol::Mcp::Schema::V20250326
   class TextResourceContents < ResourceContents
+    include Protocol::Mcp::Schema::Type
 
     # The text of the item. This must only be set if the item can actually be represented as text (not binary data).
     schema_attribute :text

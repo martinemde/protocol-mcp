@@ -28,6 +28,7 @@ module Protocol::Mcp::Schema::V20250326
     # @param uri [String] The URI or URI template of the resource.
     #   @format uri-template
     def initialize(uri:, **kwargs)
+      type = "ref/resource"
       @attributes = { type: type, uri: uri }.merge(kwargs)
     end
   end

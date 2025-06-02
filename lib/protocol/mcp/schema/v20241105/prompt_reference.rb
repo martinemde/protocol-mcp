@@ -25,6 +25,7 @@ module Protocol::Mcp::Schema::V20241105
 
     # @param name [String] The name of the prompt or prompt template
     def initialize(name:, **kwargs)
+      type = "ref/prompt"
       @attributes = { type: type, name: name }.merge(kwargs)
     end
   end

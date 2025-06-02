@@ -14,6 +14,7 @@
 module Protocol::Mcp::Schema::V20241105
   # Text provided to or from an LLM.
   class TextContent < Annotated
+    include Protocol::Mcp::Schema::Type
 
     schema_attribute :type
 
@@ -22,6 +23,7 @@ module Protocol::Mcp::Schema::V20241105
 
     # @param text [String] The text content of the message.
     def initialize(text:, **kwargs)
+      type = "text"
       super(type: type, text: text, **kwargs)
     end
   end

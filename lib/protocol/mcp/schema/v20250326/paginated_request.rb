@@ -15,6 +15,7 @@
 # ```
 module Protocol::Mcp::Schema::V20250326
   class PaginatedRequest < Request
+    include Protocol::Mcp::Schema::Type
 
     schema_attribute :params
 

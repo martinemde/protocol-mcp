@@ -10,6 +10,7 @@
 module Protocol::Mcp::Schema::V20250326
   # The server's response to a resources/templates/list request from the client.
   class ListResourceTemplatesResult < PaginatedResult
+    include Protocol::Mcp::Schema::Type
 
     schema_attribute :resource_templates
 

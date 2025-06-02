@@ -24,6 +24,7 @@
 module Protocol::Mcp::Schema::V20241105
   # Notification of a log message passed from server to client. If no logging/setLevel request has been sent from the client, the server MAY decide which messages to send automatically.
   class LoggingMessageNotification < Notification
+    include Protocol::Mcp::Schema::Type
     include ServerNotification
 
     # The severity of this log message.

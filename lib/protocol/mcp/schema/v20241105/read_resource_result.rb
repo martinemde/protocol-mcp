@@ -10,6 +10,7 @@
 module Protocol::Mcp::Schema::V20241105
   # The server's response to a resources/read request from the client.
   class ReadResourceResult < Result
+    include Protocol::Mcp::Schema::Type
     include ServerResult
 
     schema_attribute :contents

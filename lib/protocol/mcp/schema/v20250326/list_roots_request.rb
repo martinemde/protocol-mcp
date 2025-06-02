@@ -16,6 +16,7 @@ module Protocol::Mcp::Schema::V20250326
   # This request is typically used when the server needs to understand the file system
   # structure or access specific locations that the client has permission to read from.
   class ListRootsRequest < Request
+    include Protocol::Mcp::Schema::Type
     include ServerRequest
 
     def initialize(**params)

@@ -12,6 +12,7 @@ module Protocol::Mcp::Schema::V20250326
   # This notification should be sent whenever the client adds, removes, or modifies any root.
   # The server should then request an updated list of roots using the ListRootsRequest.
   class RootsListChangedNotification < Notification
+    include Protocol::Mcp::Schema::Type
     include ClientNotification
 
     def initialize(**params)

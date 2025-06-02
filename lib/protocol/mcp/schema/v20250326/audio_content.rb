@@ -48,6 +48,7 @@ module Protocol::Mcp::Schema::V20250326
     #   The MIME type of the audio. Different providers may support different audio types.
     # @param annotations [Annotations] (nil) Optional annotations for the client.
     def initialize(data:, mime_type:, annotations: nil, **kwargs)
+      type = "audio"
       @attributes = { type: type, data: data, mimeType: mime_type, annotations: annotations }.merge(kwargs)
     end
   end

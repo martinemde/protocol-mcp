@@ -18,6 +18,7 @@
 module Protocol::Mcp::Schema::V20241105
   # A notification from the server to the client, informing it that a resource has changed and may need to be read again. This should only be sent if the client previously sent a resources/subscribe request.
   class ResourceUpdatedNotification < Notification
+    include Protocol::Mcp::Schema::Type
     include ServerNotification
 
     # The URI of the resource that has been updated. This might be a sub-resource of the one that the client actually subscribed to.

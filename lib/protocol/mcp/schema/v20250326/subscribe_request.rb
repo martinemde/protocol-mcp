@@ -18,6 +18,7 @@
 module Protocol::Mcp::Schema::V20250326
   # Sent from the client to request resources/updated notifications from the server whenever a particular resource changes.
   class SubscribeRequest < Request
+    include Protocol::Mcp::Schema::Type
     include ClientRequest
 
     # The URI of the resource to subscribe to. The URI can use any protocol; it is up to the server how to interpret it.

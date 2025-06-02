@@ -32,6 +32,7 @@
 module Protocol::Mcp::Schema::V20250326
   # An out-of-band notification used to inform the receiver of a progress update for a long-running request.
   class ProgressNotification < Notification
+    include Protocol::Mcp::Schema::Type
     include ClientNotification
     include ServerNotification
 

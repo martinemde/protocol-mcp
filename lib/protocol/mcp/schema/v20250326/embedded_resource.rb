@@ -32,6 +32,7 @@ module Protocol::Mcp::Schema::V20250326
 
     # @param annotations [Annotations] (nil) Optional annotations for the client.
     def initialize(resource:, annotations: nil, **kwargs)
+      type = "resource"
       @attributes = { type: type, resource: resource, annotations: annotations }.merge(kwargs)
     end
   end

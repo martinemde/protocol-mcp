@@ -14,6 +14,7 @@
 module Protocol::Mcp::Schema::V20241105
   # The server's response to a prompts/get request from the client.
   class GetPromptResult < Result
+    include Protocol::Mcp::Schema::Type
     include ServerResult
 
     # An optional description for the prompt.

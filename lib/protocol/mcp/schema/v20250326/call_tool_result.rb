@@ -26,6 +26,7 @@ module Protocol::Mcp::Schema::V20250326
   # server does not support tool calls, or any other exceptional conditions,
   # should be reported as an MCP error response.
   class CallToolResult < Result
+    include Protocol::Mcp::Schema::Type
     include ServerResult
 
     schema_attribute :content

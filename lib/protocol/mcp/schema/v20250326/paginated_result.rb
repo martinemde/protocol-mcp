@@ -13,6 +13,7 @@
 # ```
 module Protocol::Mcp::Schema::V20250326
   class PaginatedResult < Result
+    include Protocol::Mcp::Schema::Type
 
     # An opaque token representing the pagination position after the last returned result.
     # If present, there may be more results available.

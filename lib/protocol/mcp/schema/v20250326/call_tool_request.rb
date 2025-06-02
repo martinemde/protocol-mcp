@@ -14,6 +14,7 @@
 module Protocol::Mcp::Schema::V20250326
   # Used by the client to invoke a tool provided by the server.
   class CallToolRequest < Request
+    include Protocol::Mcp::Schema::Type
     include ClientRequest
 
     schema_attribute :name

@@ -26,6 +26,7 @@
 module Protocol::Mcp::Schema::V20241105
   # A request from the client to the server, to ask for completion options.
   class CompleteRequest < Request
+    include Protocol::Mcp::Schema::Type
     include ClientRequest
 
     schema_attribute :ref

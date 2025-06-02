@@ -35,6 +35,7 @@ module Protocol::Mcp::Schema::V20250326
     # @param text [String] The text content of the message.
     # @param annotations [Annotations] (nil) Optional annotations for the client.
     def initialize(text:, annotations: nil, **kwargs)
+      type = "text"
       @attributes = { type: type, text: text, annotations: annotations }.merge(kwargs)
     end
   end

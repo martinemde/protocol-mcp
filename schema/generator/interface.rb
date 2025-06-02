@@ -15,7 +15,7 @@ module Schema
       end
 
       def base_type = ast_structure[:extends]&.first
-      def extends_base_type? = base_type && MODULES.include?(base_type)
+      def is_base_module? = MODULES.include?(name)
 
       def generate
         # Skip JSONRPC classes entirely
@@ -32,13 +32,22 @@ module Schema
       def generate_interface_class(indented)
         puts "generating interface class #{name}"
 
-        generate_class(indented, name, comment, extends: base_type) do |indented2|
-          generate_includes(indented2, base_type)
+        # Base modules inherit from Protocol::Jsonrpc classes
+        parent_class = if is_base_module?
+          "Protocol::Jsonrpc::#{name}"
+        else
+          base_type
+        end
+
+        generate_class(indented, name, comment, extends: parent_class) do |indented2|
+          generate_includes(indented2, parent_class)
 
           method_value = members[:method]&.literal
 
-          # Split between Request/Notification classes and Normal classes
-          if method_value
+          # Handle base modules differently
+          if is_base_module?
+            # just inherit from the base class
+          elsif method_value
             generate_request_body(indented2, method_value)
           else
             # Normal classes accept all their properties
@@ -110,6 +119,13 @@ module Schema
 
         # Generate method
         generate_method(indented, 'initialize', initialize_kwargs) do |indented2|
+          # Generate literal type assignments first
+          members.each do |name, prop|
+            if prop.literal_type?
+              indented2 << "#{name} = #{prop.literal.inspect}"
+            end
+          end
+
           # Store additional attributes only for base classes
           unless base_type
             # Merge named parameters and kwargs into @attributes
@@ -141,11 +157,9 @@ module Schema
         generate_code_block(ruby_code, "class #{name}#{parent}", comment:, &block)
       end
 
-      def generate_includes(indented, base_type)
-        # Include the Type module for schema_attribute functionality
-        unless base_type
-          indented << "include Protocol::Mcp::Schema::Type"
-        end
+      def generate_includes(indented, parent_class)
+        # Always include the Type module for schema_attribute functionality
+        indented << "include Protocol::Mcp::Schema::Type"
 
         type_aliases.each do |type_alias|
           indented << "include #{type_alias}"

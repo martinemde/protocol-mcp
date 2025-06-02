@@ -22,6 +22,7 @@
 module Protocol::Mcp::Schema::V20250326
   # After receiving an initialize request from the client, the server sends this response.
   class InitializeResult < Result
+    include Protocol::Mcp::Schema::Type
     include ServerResult
 
     # The version of the Model Context Protocol that the server wants to use. This may not match the version that the client requested. If the client cannot support this version, it MUST disconnect.

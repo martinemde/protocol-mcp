@@ -14,12 +14,14 @@ module Protocol::Mcp::Schema::V20241105
   # It is up to the client how best to render embedded resources for the benefit
   # of the LLM and/or the user.
   class EmbeddedResource < Annotated
+    include Protocol::Mcp::Schema::Type
 
     schema_attribute :type
 
     schema_attribute :resource
 
     def initialize(resource:, **kwargs)
+      type = "resource"
       super(type: type, resource: resource, **kwargs)
     end
   end

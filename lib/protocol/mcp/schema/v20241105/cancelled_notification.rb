@@ -29,6 +29,7 @@ module Protocol::Mcp::Schema::V20241105
   # 
   # A client MUST NOT attempt to cancel its `initialize` request.
   class CancelledNotification < Notification
+    include Protocol::Mcp::Schema::Type
     include ClientNotification
     include ServerNotification
 

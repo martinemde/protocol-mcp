@@ -23,6 +23,7 @@
 module Protocol::Mcp::Schema::V20250326
   # The server's response to a completion/complete request
   class CompleteResult < Result
+    include Protocol::Mcp::Schema::Type
     include ServerResult
 
     schema_attribute :completion

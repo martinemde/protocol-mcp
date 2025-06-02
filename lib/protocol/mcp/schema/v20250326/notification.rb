@@ -15,17 +15,8 @@
 # }
 # ```
 module Protocol::Mcp::Schema::V20250326
-  class Notification
+  class Notification < Protocol::Jsonrpc::Notification
     include Protocol::Mcp::Schema::Type
 
-    schema_attribute :method
-
-    schema_attribute :params
-
-    attr_reader :attributes
-
-    def initialize(method:, params: nil, **kwargs)
-      @attributes = { method: method, params: params }.merge(kwargs)
-    end
   end
 end

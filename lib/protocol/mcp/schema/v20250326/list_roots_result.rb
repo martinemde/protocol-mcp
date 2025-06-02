@@ -12,6 +12,7 @@ module Protocol::Mcp::Schema::V20250326
   # This result contains an array of Root objects, each representing a root directory
   # or file that the server can operate on.
   class ListRootsResult < Result
+    include Protocol::Mcp::Schema::Type
     include ClientResult
 
     schema_attribute :roots
