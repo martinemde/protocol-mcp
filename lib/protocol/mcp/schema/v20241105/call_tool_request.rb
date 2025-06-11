@@ -17,9 +17,11 @@ module Protocol::Mcp::Schema::V20241105
     include Protocol::Mcp::Schema::Type
     include ClientRequest
 
+    METHOD = "tools/call"
+
     schema_attribute :name
 
-    schema_attribute :arguments
+    schema_attribute :arguments, optional: true
 
     def initialize(name:, arguments: nil)
       params = {

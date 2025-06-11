@@ -13,8 +13,10 @@ module Protocol::Mcp::Schema::V20241105
     include Protocol::Mcp::Schema::Type
     include ClientNotification
 
+    METHOD = "notifications/initialized"
+
     def initialize(**params)
-      super(method: "notifications/initialized", params:)
+      super(method: METHOD, params:)
     end
   end
 end

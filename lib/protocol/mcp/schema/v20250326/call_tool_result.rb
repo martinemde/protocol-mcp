@@ -34,7 +34,7 @@ module Protocol::Mcp::Schema::V20250326
     # Whether the tool call ended in an error.
     # 
     # If not set, this is assumed to be false (the call was successful).
-    schema_attribute :is_error
+    schema_attribute :is_error, optional: true
 
     # @param is_error [Boolean] (nil) Whether the tool call ended in an error.
     #   If not set, this is assumed to be false (the call was successful).

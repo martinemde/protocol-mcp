@@ -32,6 +32,8 @@ module Protocol::Mcp::Schema::V20241105
     include ClientNotification
     include ServerNotification
 
+    METHOD = "notifications/progress"
+
     # The progress token which was given in the initial request, used to associate this notification with the request that is proceeding.
     schema_attribute :progress_token
 
@@ -39,7 +41,7 @@ module Protocol::Mcp::Schema::V20241105
     schema_attribute :progress
 
     # Total number of items to process (or total progress required), if known.
-    schema_attribute :total
+    schema_attribute :total, optional: true
 
     # @param progress_token [ProgressToken]
     #   The progress token which was given in the initial request, used to associate this notification with the request that is proceeding.

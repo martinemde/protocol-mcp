@@ -24,7 +24,7 @@ module Protocol::Mcp::Schema::V20250326
     schema_attribute :model
 
     # The reason why sampling stopped, if known.
-    schema_attribute :stop_reason
+    schema_attribute :stop_reason, optional: true
 
     # @param model [String] The name of the model that generated the message.
     # @param stop_reason [endTurn, stopSequence, maxTokens, String] (nil) The reason why sampling stopped, if known.

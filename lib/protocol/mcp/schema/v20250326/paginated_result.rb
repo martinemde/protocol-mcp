@@ -17,7 +17,7 @@ module Protocol::Mcp::Schema::V20250326
 
     # An opaque token representing the pagination position after the last returned result.
     # If present, there may be more results available.
-    schema_attribute :next_cursor
+    schema_attribute :next_cursor, optional: true
 
     # @param next_cursor [Cursor] (nil)
     #   An opaque token representing the pagination position after the last returned result.

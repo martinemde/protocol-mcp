@@ -21,6 +21,8 @@ module Protocol::Mcp::Schema::V20241105
     include Protocol::Mcp::Schema::Type
     include ServerNotification
 
+    METHOD = "notifications/resources/updated"
+
     # The URI of the resource that has been updated. This might be a sub-resource of the one that the client actually subscribed to.
     schema_attribute :uri
 

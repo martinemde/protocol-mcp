@@ -12,14 +12,15 @@ require_relative '../schema/generator'
 # Main execution
 if __FILE__ == $PROGRAM_NAME
   if ARGV.length < 2
-    puts "Usage: #{$PROGRAM_NAME} <json_file_path> <output_directory>"
+    puts "Usage: #{$PROGRAM_NAME} <json_file_path> <version> [output_directory]"
     exit 1
   end
 
   json_file_path = ARGV[0]
-  output_dir = ARGV[1]
+  version = ARGV[1]
+  output_dir = ARGV[2] || "lib/protocol/mcp/schema"
 
-  generator = Schema::Generator.new(json_file_path, output_dir)
+  generator = Schema::Generator.new(json_file_path: json_file_path, output_dir: output_dir, version:)
   generator.generate
   puts "Schema generation complete. Output directory: #{output_dir}"
 end

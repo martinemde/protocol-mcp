@@ -38,7 +38,7 @@ module Protocol::Mcp::Schema::V20250326
     schema_attribute :mime_type
 
     # Optional annotations for the client.
-    schema_attribute :annotations
+    schema_attribute :annotations, optional: true
 
     attr_reader :attributes
 

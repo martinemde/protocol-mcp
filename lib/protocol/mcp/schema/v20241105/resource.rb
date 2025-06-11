@@ -54,15 +54,15 @@ module Protocol::Mcp::Schema::V20241105
     # A description of what this resource represents.
     # 
     # This can be used by clients to improve the LLM's understanding of available resources. It can be thought of like a "hint" to the model.
-    schema_attribute :description
+    schema_attribute :description, optional: true
 
     # The MIME type of this resource, if known.
-    schema_attribute :mime_type
+    schema_attribute :mime_type, optional: true
 
     # The size of the raw resource content, in bytes (i.e., before base64 encoding or any tokenization), if known.
     # 
     # This can be used by Hosts to display file sizes and estimate context window usage.
-    schema_attribute :size
+    schema_attribute :size, optional: true
 
     # @param uri [String] The URI of this resource.
     #   @format uri

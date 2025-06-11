@@ -15,8 +15,10 @@ module Protocol::Mcp::Schema::V20241105
     include Protocol::Mcp::Schema::Type
     include ClientNotification
 
+    METHOD = "notifications/roots/list_changed"
+
     def initialize(**params)
-      super(method: "notifications/roots/list_changed", params:)
+      super(method: METHOD, params:)
     end
   end
 end

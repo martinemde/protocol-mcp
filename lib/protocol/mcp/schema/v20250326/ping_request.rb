@@ -14,8 +14,10 @@ module Protocol::Mcp::Schema::V20250326
     include ClientRequest
     include ServerRequest
 
+    METHOD = "ping"
+
     def initialize(**params)
-      super(method: "ping", params:)
+      super(method: METHOD, params:)
     end
   end
 end

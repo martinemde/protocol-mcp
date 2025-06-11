@@ -21,6 +21,8 @@ module Protocol::Mcp::Schema::V20250326
     include Protocol::Mcp::Schema::Type
     include ClientRequest
 
+    METHOD = "resources/subscribe"
+
     # The URI of the resource to subscribe to. The URI can use any protocol; it is up to the server how to interpret it.
     schema_attribute :uri
 

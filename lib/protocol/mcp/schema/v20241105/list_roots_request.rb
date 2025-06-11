@@ -19,8 +19,10 @@ module Protocol::Mcp::Schema::V20241105
     include Protocol::Mcp::Schema::Type
     include ServerRequest
 
+    METHOD = "roots/list"
+
     def initialize(**params)
-      super(method: "roots/list", params:)
+      super(method: METHOD, params:)
     end
   end
 end

@@ -41,26 +41,28 @@ module Protocol::Mcp::Schema::V20250326
     include Protocol::Mcp::Schema::Type
     include ServerRequest
 
+    METHOD = "sampling/createMessage"
+
     schema_attribute :messages
 
     # The server's preferences for which model to select. The client MAY ignore these preferences.
-    schema_attribute :model_preferences
+    schema_attribute :model_preferences, optional: true
 
     # An optional system prompt the server wants to use for sampling. The client MAY modify or omit this prompt.
-    schema_attribute :system_prompt
+    schema_attribute :system_prompt, optional: true
 
     # A request to include context from one or more MCP servers (including the caller), to be attached to the prompt. The client MAY ignore this request.
-    schema_attribute :include_context
+    schema_attribute :include_context, optional: true
 
-    schema_attribute :temperature
+    schema_attribute :temperature, optional: true
 
     # The maximum number of tokens to sample, as requested by the server. The client MAY choose to sample fewer tokens than requested.
     schema_attribute :max_tokens
 
-    schema_attribute :stop_sequences
+    schema_attribute :stop_sequences, optional: true
 
     # Optional metadata to pass through to the LLM provider. The format of this metadata is provider-specific.
-    schema_attribute :metadata
+    schema_attribute :metadata, optional: true
 
     # @param model_preferences [ModelPreferences] (nil)
     #   The server's preferences for which model to select. The client MAY ignore these preferences.

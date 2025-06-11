@@ -42,13 +42,13 @@ module Protocol::Mcp::Schema::V20250326
     # A human-readable description of the tool.
     # 
     # This can be used by clients to improve the LLM's understanding of available tools. It can be thought of like a "hint" to the model.
-    schema_attribute :description
+    schema_attribute :description, optional: true
 
     # A JSON Schema object defining the expected parameters for the tool.
     schema_attribute :input_schema
 
     # Optional additional tool information.
-    schema_attribute :annotations
+    schema_attribute :annotations, optional: true
 
     attr_reader :attributes
 

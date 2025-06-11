@@ -33,7 +33,7 @@ module Protocol::Mcp::Schema::V20241105
     # An optional name for the root. This can be used to provide a human-readable
     # identifier for the root, which may be useful for display purposes or for
     # referencing the root in other parts of the application.
-    schema_attribute :name
+    schema_attribute :name, optional: true
 
     attr_reader :attributes
 

@@ -18,7 +18,7 @@ module Protocol::Mcp::Schema::V20241105
     include ServerResult
 
     # An optional description for the prompt.
-    schema_attribute :description
+    schema_attribute :description, optional: true
 
     schema_attribute :messages
 

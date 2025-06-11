@@ -33,13 +33,15 @@ module Protocol::Mcp::Schema::V20241105
     include ClientNotification
     include ServerNotification
 
+    METHOD = "notifications/cancelled"
+
     # The ID of the request to cancel.
     # 
     # This MUST correspond to the ID of a request previously issued in the same direction.
     schema_attribute :request_id
 
     # An optional string describing the reason for the cancellation. This MAY be logged or presented to the user.
-    schema_attribute :reason
+    schema_attribute :reason, optional: true
 
     # @param request_id [RequestId] The ID of the request to cancel.
     #   This MUST correspond to the ID of a request previously issued in the same direction.

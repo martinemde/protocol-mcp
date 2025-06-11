@@ -71,22 +71,22 @@ module Protocol::Mcp::Schema::V20250326
     # 
     # The client SHOULD prioritize these hints over the numeric priorities, but
     # MAY still use the priorities to select from ambiguous matches.
-    schema_attribute :hints
+    schema_attribute :hints, optional: true
 
     # How much to prioritize cost when selecting a model. A value of 0 means cost
     # is not important, while a value of 1 means cost is the most important
     # factor.
-    schema_attribute :cost_priority
+    schema_attribute :cost_priority, optional: true
 
     # How much to prioritize sampling speed (latency) when selecting a model. A
     # value of 0 means speed is not important, while a value of 1 means speed is
     # the most important factor.
-    schema_attribute :speed_priority
+    schema_attribute :speed_priority, optional: true
 
     # How much to prioritize intelligence and capabilities when selecting a
     # model. A value of 0 means intelligence is not important, while a value of 1
     # means intelligence is the most important factor.
-    schema_attribute :intelligence_priority
+    schema_attribute :intelligence_priority, optional: true
 
     attr_reader :attributes
 

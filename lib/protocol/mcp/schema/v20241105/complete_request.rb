@@ -29,6 +29,8 @@ module Protocol::Mcp::Schema::V20241105
     include Protocol::Mcp::Schema::Type
     include ClientRequest
 
+    METHOD = "completion/complete"
+
     schema_attribute :ref
 
     # The argument's information

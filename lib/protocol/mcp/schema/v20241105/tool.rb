@@ -31,7 +31,7 @@ module Protocol::Mcp::Schema::V20241105
     schema_attribute :name
 
     # A human-readable description of the tool.
-    schema_attribute :description
+    schema_attribute :description, optional: true
 
     # A JSON Schema object defining the expected parameters for the tool.
     schema_attribute :input_schema

@@ -21,6 +21,8 @@ module Protocol::Mcp::Schema::V20250326
     include Protocol::Mcp::Schema::Type
     include ClientRequest
 
+    METHOD = "initialize"
+
     # The latest version of the Model Context Protocol that the client supports. The client MAY decide to support older versions as well.
     schema_attribute :protocol_version
 

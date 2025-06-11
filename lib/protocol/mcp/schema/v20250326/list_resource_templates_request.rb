@@ -12,8 +12,10 @@ module Protocol::Mcp::Schema::V20250326
   class ListResourceTemplatesRequest < PaginatedRequest
     include Protocol::Mcp::Schema::Type
 
+    METHOD = "resources/templates/list"
+
     def initialize(**params)
-      super(method: "resources/templates/list", params:)
+      super(method: METHOD, params:)
     end
   end
 end

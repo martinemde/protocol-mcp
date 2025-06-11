@@ -7,10 +7,16 @@ module Protocol::Mcp::Schema
     end
 
     module ClassMethods
-      def schema_attribute(name, type, required: false)
+      def schema_attribute(name, optional: false)
         define_method(name) { attributes[name] }
-        define_method("#{name}_type") { type }
-        define_method("#{name}_required?") { required }
+        define_method("#{name}_optional?") { optional }
+        define_method("#{name}_required?") { !optional }
+      end
+
+      def params_attribute(name, optional: false)
+        define_method(name) { params[name] }
+        define_method("#{name}_optional?") { optional }
+        define_method("#{name}_required?") { !optional }
       end
     end
 

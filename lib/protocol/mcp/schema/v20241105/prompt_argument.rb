@@ -27,10 +27,10 @@ module Protocol::Mcp::Schema::V20241105
     schema_attribute :name
 
     # A human-readable description of the argument.
-    schema_attribute :description
+    schema_attribute :description, optional: true
 
     # Whether this argument must be provided.
-    schema_attribute :required
+    schema_attribute :required, optional: true
 
     attr_reader :attributes
 

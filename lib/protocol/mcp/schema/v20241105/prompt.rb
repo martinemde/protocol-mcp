@@ -27,10 +27,10 @@ module Protocol::Mcp::Schema::V20241105
     schema_attribute :name
 
     # An optional description of what this prompt provides
-    schema_attribute :description
+    schema_attribute :description, optional: true
 
     # A list of arguments to use for templating the prompt.
-    schema_attribute :arguments
+    schema_attribute :arguments, optional: true
 
     attr_reader :attributes
 

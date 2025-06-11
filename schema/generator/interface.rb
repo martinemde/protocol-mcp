@@ -44,6 +44,11 @@ module Schema
 
           method_value = members[:method]&.literal
 
+          if method_value
+            indented2 << "METHOD = \"#{method_value}\""
+            indented2 << ""
+          end
+
           # Handle base modules differently
           if is_base_module?
             # just inherit from the base class
@@ -64,7 +69,7 @@ module Schema
         if params_members.empty?
           # For classes with no params properties, create a simple initialize method
           generate_method(indented, 'initialize', ["**params"]) do |indented2|
-            indented2 << "super(method: \"#{method_value}\", params:)"
+            indented2 << "super(method: METHOD, params:)"
           end
           return
         end
@@ -88,7 +93,7 @@ module Schema
 
           # Call super with the method and params
           if method_value
-            indented2 << "super(method: \"#{method_value}\", params:)"
+            indented2 << "super(method: METHOD, params:)"
           else
             indented2 << "super(params:)"
           end
@@ -170,7 +175,11 @@ module Schema
       def generate_attr_readers(indented, props)
         props.each do |name, prop|
           generate_comment(indented, prop.comment_lines)
-          indented << "schema_attribute :#{name}"
+          if prop.optional
+            indented << "schema_attribute :#{name}, optional: true"
+          else
+            indented << "schema_attribute :#{name}"
+          end
           indented << ""
         end
       end

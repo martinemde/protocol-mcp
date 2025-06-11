@@ -52,13 +52,13 @@ module Protocol::Mcp::Schema::V20250326
     # A description of what this resource represents.
     # 
     # This can be used by clients to improve the LLM's understanding of available resources. It can be thought of like a "hint" to the model.
-    schema_attribute :description
+    schema_attribute :description, optional: true
 
     # The MIME type of this resource, if known.
-    schema_attribute :mime_type
+    schema_attribute :mime_type, optional: true
 
     # Optional annotations for the client.
-    schema_attribute :annotations
+    schema_attribute :annotations, optional: true
 
     attr_reader :attributes
 

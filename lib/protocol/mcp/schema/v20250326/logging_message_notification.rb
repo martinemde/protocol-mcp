@@ -27,11 +27,13 @@ module Protocol::Mcp::Schema::V20250326
     include Protocol::Mcp::Schema::Type
     include ServerNotification
 
+    METHOD = "notifications/message"
+
     # The severity of this log message.
     schema_attribute :level
 
     # An optional name of the logger issuing this message.
-    schema_attribute :logger
+    schema_attribute :logger, optional: true
 
     # The data to be logged, such as a string message or an object. Any JSON serializable type is allowed here.
     schema_attribute :data

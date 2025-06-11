@@ -60,32 +60,32 @@ module Protocol::Mcp::Schema::V20250326
     include Protocol::Mcp::Schema::Type
 
     # A human-readable title for the tool.
-    schema_attribute :title
+    schema_attribute :title, optional: true
 
     # If true, the tool does not modify its environment.
     # 
-    schema_attribute :read_only_hint
+    schema_attribute :read_only_hint, optional: true
 
     # If true, the tool may perform destructive updates to its environment.
     # If false, the tool performs only additive updates.
     # 
     # (This property is meaningful only when `readOnlyHint == false`)
     # 
-    schema_attribute :destructive_hint
+    schema_attribute :destructive_hint, optional: true
 
     # If true, calling the tool repeatedly with the same arguments
     # will have no additional effect on the its environment.
     # 
     # (This property is meaningful only when `readOnlyHint == false`)
     # 
-    schema_attribute :idempotent_hint
+    schema_attribute :idempotent_hint, optional: true
 
     # If true, this tool may interact with an "open world" of external
     # entities. If false, the tool's domain of interaction is closed.
     # For example, the world of a web search tool is open, whereas that
     # of a memory tool is not.
     # 
-    schema_attribute :open_world_hint
+    schema_attribute :open_world_hint, optional: true
 
     attr_reader :attributes
 

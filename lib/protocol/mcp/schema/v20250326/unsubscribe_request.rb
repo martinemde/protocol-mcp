@@ -21,6 +21,8 @@ module Protocol::Mcp::Schema::V20250326
     include Protocol::Mcp::Schema::Type
     include ClientRequest
 
+    METHOD = "resources/unsubscribe"
+
     # The URI of the resource to unsubscribe from.
     schema_attribute :uri
 

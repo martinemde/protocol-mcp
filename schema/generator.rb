@@ -19,7 +19,7 @@ module Schema
     # @param json_file_path The path to the JSON schema file
     # @param output_dir The directory to output the generated files
     # @param version The version of the schema, e.g. "2025-03-26"
-    def initialize(json_file_path:, output_dir:, version:, scope:, lib_root: "lib")
+    def initialize(json_file_path:, output_dir:, version:, scope: "Protocol::Mcp::Schema", lib_root: "lib")
       @version = version
       @version_module = "V#{version.gsub('-', '')}"
       @lib_root = lib_root

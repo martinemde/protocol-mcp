@@ -51,19 +51,19 @@ module Protocol::Mcp::Schema::V20241105
     include Protocol::Mcp::Schema::Type
 
     # Experimental, non-standard capabilities that the server supports.
-    schema_attribute :experimental
+    schema_attribute :experimental, optional: true
 
     # Present if the server supports sending log messages to the client.
-    schema_attribute :logging
+    schema_attribute :logging, optional: true
 
     # Present if the server offers any prompt templates.
-    schema_attribute :prompts
+    schema_attribute :prompts, optional: true
 
     # Present if the server offers any resources to read.
-    schema_attribute :resources
+    schema_attribute :resources, optional: true
 
     # Present if the server offers any tools to call.
-    schema_attribute :tools
+    schema_attribute :tools, optional: true
 
     attr_reader :attributes
 

@@ -29,13 +29,13 @@ module Protocol::Mcp::Schema::V20250326
     include Protocol::Mcp::Schema::Type
 
     # Experimental, non-standard capabilities that the client supports.
-    schema_attribute :experimental
+    schema_attribute :experimental, optional: true
 
     # Present if the client supports listing roots.
-    schema_attribute :roots
+    schema_attribute :roots, optional: true
 
     # Present if the client supports sampling from an LLM.
-    schema_attribute :sampling
+    schema_attribute :sampling, optional: true
 
     attr_reader :attributes
 

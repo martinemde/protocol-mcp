@@ -21,6 +21,8 @@ module Protocol::Mcp::Schema::V20241105
     include Protocol::Mcp::Schema::Type
     include ClientRequest
 
+    METHOD = "resources/read"
+
     # The URI of the resource to read. The URI can use any protocol; it is up to the server how to interpret it.
     schema_attribute :uri
 

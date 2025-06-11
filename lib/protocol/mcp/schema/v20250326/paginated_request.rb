@@ -17,7 +17,7 @@ module Protocol::Mcp::Schema::V20250326
   class PaginatedRequest < Request
     include Protocol::Mcp::Schema::Type
 
-    schema_attribute :params
+    schema_attribute :params, optional: true
 
     def initialize(params: nil, **kwargs)
       super(params: params, **kwargs)

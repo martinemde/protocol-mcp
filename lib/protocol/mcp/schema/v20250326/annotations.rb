@@ -33,14 +33,14 @@ module Protocol::Mcp::Schema::V20250326
     # Describes who the intended customer of this object or data is.
     # 
     # It can include multiple entries to indicate content useful for multiple audiences (e.g., `["user", "assistant"]`).
-    schema_attribute :audience
+    schema_attribute :audience, optional: true
 
     # Describes how important this data is for operating the server.
     # 
     # A value of 1 means "most important," and indicates that the data is
     # effectively required, while 0 means "least important," and indicates that
     # the data is entirely optional.
-    schema_attribute :priority
+    schema_attribute :priority, optional: true
 
     attr_reader :attributes
 

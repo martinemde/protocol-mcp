@@ -23,11 +23,13 @@ module Protocol::Mcp::Schema::V20250326
     include Protocol::Mcp::Schema::Type
     include ClientRequest
 
+    METHOD = "prompts/get"
+
     # The name of the prompt or prompt template.
     schema_attribute :name
 
     # Arguments to use for templating the prompt.
-    schema_attribute :arguments
+    schema_attribute :arguments, optional: true
 
     # @param name [String] The name of the prompt or prompt template.
     # @param arguments [Hash] (nil) Arguments to use for templating the prompt.

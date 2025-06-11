@@ -35,7 +35,7 @@ module Protocol::Mcp::Schema::V20241105
     # 
     # The client MAY also map the string to a different provider's model name or a different model family, as long as it fills a similar niche; for example:
     #  - `gemini-1.5-flash` could match `claude-3-haiku-20240307`
-    schema_attribute :name
+    schema_attribute :name, optional: true
 
     attr_reader :attributes
 

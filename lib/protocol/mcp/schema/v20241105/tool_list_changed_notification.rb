@@ -13,8 +13,10 @@ module Protocol::Mcp::Schema::V20241105
     include Protocol::Mcp::Schema::Type
     include ServerNotification
 
+    METHOD = "notifications/tools/list_changed"
+
     def initialize(**params)
-      super(method: "notifications/tools/list_changed", params:)
+      super(method: METHOD, params:)
     end
   end
 end

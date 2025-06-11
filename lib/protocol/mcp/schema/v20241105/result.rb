@@ -16,7 +16,7 @@ module Protocol::Mcp::Schema::V20241105
     include Protocol::Mcp::Schema::Type
 
     # This result property is reserved by the protocol to allow clients and servers to attach additional metadata to their responses.
-    schema_attribute :_meta
+    schema_attribute :_meta, optional: true
 
     attr_reader :attributes
 

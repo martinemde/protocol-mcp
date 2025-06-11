@@ -32,7 +32,7 @@ module Protocol::Mcp::Schema::V20241105
   class Annotated
     include Protocol::Mcp::Schema::Type
 
-    schema_attribute :annotations
+    schema_attribute :annotations, optional: true
 
     attr_reader :attributes
 
