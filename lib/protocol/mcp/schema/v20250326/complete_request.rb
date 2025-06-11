@@ -31,10 +31,10 @@ module Protocol::Mcp::Schema::V20250326
 
     METHOD = "completion/complete"
 
-    schema_attribute :ref
+    params_attribute :ref
 
     # The argument's information
-    schema_attribute :argument
+    params_attribute :argument
 
     # @param argument [Hash] The argument's information
     def initialize(ref:, argument:)
@@ -42,7 +42,7 @@ module Protocol::Mcp::Schema::V20250326
         ref: ref,
         argument: argument,
       }
-      super(method: "completion/complete", params:)
+      super(method: METHOD, params:)
     end
   end
 end

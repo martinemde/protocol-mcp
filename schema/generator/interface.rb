@@ -54,6 +54,8 @@ module Schema
             # just inherit from the base class
           elsif method_value
             generate_request_body(indented2, method_value)
+          elsif name == 'PaginatedRequest'
+            generate_paginated_request_body(indented2)
           else
             # Normal classes accept all their properties
             generate_normal_body(indented2)
@@ -62,11 +64,7 @@ module Schema
       end
 
       def generate_request_body(indented, method_value)
-        # For classes with params properties, create an initialize method that accepts each property
-        initialize_kwargs = []
-        params_hash = {}
-
-        if params_members.empty?
+        if params_members.empty? && method_value
           # For classes with no params properties, create a simple initialize method
           generate_method(indented, 'initialize', ["**params"]) do |indented2|
             indented2 << "super(method: METHOD, params:)"
@@ -75,7 +73,11 @@ module Schema
         end
 
         # Generate schema_attribute for properties
-        generate_attr_readers(indented, params_members)
+        generate_params_attribute(indented, params_members)
+
+        # For classes with params properties, create an initialize method that accepts each property
+        initialize_kwargs = []
+        params_hash = {}
 
         # Add comments and parameters for each property in params
         params_members.each do |name, prop|
@@ -95,11 +97,30 @@ module Schema
           if method_value
             indented2 << "super(method: METHOD, params:)"
           else
-            indented2 << "super(params:)"
+            indented2 << "super(method:, params:)"
           end
         end
       end
 
+      # PaginatedRequest is an oddball because it needs to pass through the method and params from its inherited classes,
+      # but it also needs to accept the cursor parameter which is unlike any other class.
+      def generate_paginated_request_body(indented)
+        # Generate schema_attribute for properties
+        generate_params_attribute(indented, params_members)
+
+        # For classes with params properties, create an initialize method that accepts each property
+        initialize_kwargs = ["method:", "params:"]
+        params_hash = {method: "method", params: "params"}
+
+        # Add comments and parameters for each property in params
+        params_members.each do |name, prop|
+          generate_param_comment(indented, prop)
+        end
+
+        generate_method(indented, 'initialize', initialize_kwargs) do |indented2|
+          indented2 << "super(method:, params:)"
+        end
+      end
       def generate_normal_body(indented)
         initialize_kwargs = []
 
@@ -170,6 +191,18 @@ module Schema
           indented << "include #{type_alias}"
         end
         indented << ""
+      end
+
+      def generate_params_attribute(indented, props)
+        props.each do |name, prop|
+          generate_comment(indented, prop.comment_lines)
+          if prop.optional
+            indented << "params_attribute :#{name}, optional: true"
+          else
+            indented << "params_attribute :#{name}"
+          end
+          indented << ""
+        end
       end
 
       def generate_attr_readers(indented, props)

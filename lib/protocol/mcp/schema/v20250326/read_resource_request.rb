@@ -24,7 +24,7 @@ module Protocol::Mcp::Schema::V20250326
     METHOD = "resources/read"
 
     # The URI of the resource to read. The URI can use any protocol; it is up to the server how to interpret it.
-    schema_attribute :uri
+    params_attribute :uri
 
     # @param uri [String]
     #   The URI of the resource to read. The URI can use any protocol; it is up to the server how to interpret it.
@@ -33,7 +33,7 @@ module Protocol::Mcp::Schema::V20250326
       params = {
         uri: uri,
       }
-      super(method: "resources/read", params:)
+      super(method: METHOD, params:)
     end
   end
 end

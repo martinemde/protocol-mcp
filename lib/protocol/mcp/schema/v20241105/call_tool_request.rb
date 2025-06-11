@@ -19,16 +19,16 @@ module Protocol::Mcp::Schema::V20241105
 
     METHOD = "tools/call"
 
-    schema_attribute :name
+    params_attribute :name
 
-    schema_attribute :arguments, optional: true
+    params_attribute :arguments, optional: true
 
     def initialize(name:, arguments: nil)
       params = {
         name: name,
         arguments: arguments,
       }
-      super(method: "tools/call", params:)
+      super(method: METHOD, params:)
     end
   end
 end

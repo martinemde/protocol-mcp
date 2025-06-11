@@ -24,11 +24,11 @@ module Protocol::Mcp::Schema::V20250326
     METHOD = "initialize"
 
     # The latest version of the Model Context Protocol that the client supports. The client MAY decide to support older versions as well.
-    schema_attribute :protocol_version
+    params_attribute :protocol_version
 
-    schema_attribute :capabilities
+    params_attribute :capabilities
 
-    schema_attribute :client_info
+    params_attribute :client_info
 
     # @param protocol_version [String]
     #   The latest version of the Model Context Protocol that the client supports. The client MAY decide to support older versions as well.
@@ -38,7 +38,7 @@ module Protocol::Mcp::Schema::V20250326
         capabilities: capabilities,
         clientInfo: client_info,
       }
-      super(method: "initialize", params:)
+      super(method: METHOD, params:)
     end
   end
 end

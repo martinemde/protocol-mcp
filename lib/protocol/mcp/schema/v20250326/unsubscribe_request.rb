@@ -24,7 +24,7 @@ module Protocol::Mcp::Schema::V20250326
     METHOD = "resources/unsubscribe"
 
     # The URI of the resource to unsubscribe from.
-    schema_attribute :uri
+    params_attribute :uri
 
     # @param uri [String] The URI of the resource to unsubscribe from.
     #   @format uri
@@ -32,7 +32,7 @@ module Protocol::Mcp::Schema::V20250326
       params = {
         uri: uri,
       }
-      super(method: "resources/unsubscribe", params:)
+      super(method: METHOD, params:)
     end
   end
 end

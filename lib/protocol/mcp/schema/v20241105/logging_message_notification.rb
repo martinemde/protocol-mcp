@@ -30,13 +30,13 @@ module Protocol::Mcp::Schema::V20241105
     METHOD = "notifications/message"
 
     # The severity of this log message.
-    schema_attribute :level
+    params_attribute :level
 
     # An optional name of the logger issuing this message.
-    schema_attribute :logger, optional: true
+    params_attribute :logger, optional: true
 
     # The data to be logged, such as a string message or an object. Any JSON serializable type is allowed here.
-    schema_attribute :data
+    params_attribute :data
 
     # @param level [LoggingLevel] The severity of this log message.
     # @param logger [String] (nil)
@@ -49,7 +49,7 @@ module Protocol::Mcp::Schema::V20241105
         logger: logger,
         data: data,
       }
-      super(method: "notifications/message", params:)
+      super(method: METHOD, params:)
     end
   end
 end

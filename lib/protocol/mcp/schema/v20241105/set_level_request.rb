@@ -22,7 +22,7 @@ module Protocol::Mcp::Schema::V20241105
     METHOD = "logging/setLevel"
 
     # The level of logging that the client wants to receive from the server. The server should send all logs at this level and higher (i.e., more severe) to the client as notifications/message.
-    schema_attribute :level
+    params_attribute :level
 
     # @param level [LoggingLevel]
     #   The level of logging that the client wants to receive from the server. The server should send all logs at this level and higher (i.e., more severe) to the client as notifications/message.
@@ -30,7 +30,7 @@ module Protocol::Mcp::Schema::V20241105
       params = {
         level: level,
       }
-      super(method: "logging/setLevel", params:)
+      super(method: METHOD, params:)
     end
   end
 end

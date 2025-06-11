@@ -24,7 +24,7 @@ module Protocol::Mcp::Schema::V20250326
     METHOD = "notifications/resources/updated"
 
     # The URI of the resource that has been updated. This might be a sub-resource of the one that the client actually subscribed to.
-    schema_attribute :uri
+    params_attribute :uri
 
     # @param uri [String]
     #   The URI of the resource that has been updated. This might be a sub-resource of the one that the client actually subscribed to.
@@ -33,7 +33,7 @@ module Protocol::Mcp::Schema::V20250326
       params = {
         uri: uri,
       }
-      super(method: "notifications/resources/updated", params:)
+      super(method: METHOD, params:)
     end
   end
 end

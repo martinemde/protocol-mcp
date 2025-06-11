@@ -35,13 +35,13 @@ module Protocol::Mcp::Schema::V20241105
     METHOD = "notifications/progress"
 
     # The progress token which was given in the initial request, used to associate this notification with the request that is proceeding.
-    schema_attribute :progress_token
+    params_attribute :progress_token
 
     # The progress thus far. This should increase every time progress is made, even if the total is unknown.
-    schema_attribute :progress
+    params_attribute :progress
 
     # Total number of items to process (or total progress required), if known.
-    schema_attribute :total, optional: true
+    params_attribute :total, optional: true
 
     # @param progress_token [ProgressToken]
     #   The progress token which was given in the initial request, used to associate this notification with the request that is proceeding.
@@ -55,7 +55,7 @@ module Protocol::Mcp::Schema::V20241105
         progress: progress,
         total: total,
       }
-      super(method: "notifications/progress", params:)
+      super(method: METHOD, params:)
     end
   end
 end

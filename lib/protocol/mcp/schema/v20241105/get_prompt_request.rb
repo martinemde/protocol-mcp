@@ -26,10 +26,10 @@ module Protocol::Mcp::Schema::V20241105
     METHOD = "prompts/get"
 
     # The name of the prompt or prompt template.
-    schema_attribute :name
+    params_attribute :name
 
     # Arguments to use for templating the prompt.
-    schema_attribute :arguments, optional: true
+    params_attribute :arguments, optional: true
 
     # @param name [String] The name of the prompt or prompt template.
     # @param arguments [Hash] (nil) Arguments to use for templating the prompt.
@@ -38,7 +38,7 @@ module Protocol::Mcp::Schema::V20241105
         name: name,
         arguments: arguments,
       }
-      super(method: "prompts/get", params:)
+      super(method: METHOD, params:)
     end
   end
 end

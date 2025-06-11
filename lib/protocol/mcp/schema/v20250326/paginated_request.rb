@@ -17,10 +17,15 @@ module Protocol::Mcp::Schema::V20250326
   class PaginatedRequest < Request
     include Protocol::Mcp::Schema::Type
 
-    schema_attribute :params, optional: true
+    # An opaque token representing the current pagination position.
+    # If provided, the server should return results starting after this cursor.
+    params_attribute :cursor, optional: true
 
-    def initialize(params: nil, **kwargs)
-      super(params: params, **kwargs)
+    # @param cursor [Cursor] (nil)
+    #   An opaque token representing the current pagination position.
+    #   If provided, the server should return results starting after this cursor.
+    def initialize(method:, params:)
+      super(method:, params:)
     end
   end
 end

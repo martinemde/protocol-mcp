@@ -8,15 +8,25 @@ module Protocol::Mcp::Schema
 
     module ClassMethods
       def schema_attribute(name, optional: false)
-        define_method(name) { attributes[name] }
+        key = snake_to_camel_case(name.to_s)
+        define_method(name) { attributes[key] }
         define_method("#{name}_optional?") { optional }
         define_method("#{name}_required?") { !optional }
       end
 
       def params_attribute(name, optional: false)
-        define_method(name) { params[name] }
+        key = snake_to_camel_case(name.to_s)
+        define_method(name) { params[key] }
         define_method("#{name}_optional?") { optional }
         define_method("#{name}_required?") { !optional }
+      end
+
+      private
+
+      def snake_to_camel_case(str)
+        str.split('_').map.with_index { |word, index|
+          index == 0 ? word : word.capitalize
+        }.join.to_sym
       end
     end
 
